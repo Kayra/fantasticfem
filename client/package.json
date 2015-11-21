@@ -1,0 +1,22 @@
+{
+  "name": "fantasticfem",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kayra/fantasticfem.git"
+  },
+  "author": "Kayra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kayra/fantasticfem/issues"
+  },
+  "homepage": "https://github.com/Kayra/fantasticfem#readme",
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  }
+}

@@ -1,3 +1,5 @@
+import random
+
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -20,8 +22,13 @@ def getFemale(request):
 
 @api_view(['GET'])
 def getRandomFemale(request):
-    pass
 
+    last = Female.objects.count() - 1
+    randomIndex = random.randint(0, last)
+    randomFemale = Female.objects.all()[randomIndex]
+
+    serializedFemale = FemaleSerializer(randomFemale)
+    return Response(serializedFemale.data)
 
 
 @api_view(['POST'])

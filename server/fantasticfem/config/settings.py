@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'fantasticfem.wsgi.application'
+WSGI_APPLICATION = 'fantasticfem.config.wsgi.application'
 
 
 # Database

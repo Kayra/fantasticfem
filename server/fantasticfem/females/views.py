@@ -45,7 +45,19 @@ def createFemale(request):
 
 @api_view(['PUT'])
 def editFemale(request):
-    pass
+
+    try:
+        female = Female.objects.get(pk=request.data['pk'])
+    except Female.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    serializedFemale = FemaleSerializer(female, data=request.data)
+
+    if serializedFemale.is_valid():
+        serializedFemale.save()
+        return Response(serializedFemale.data)
+
+    return Response(serializedFemale.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['DELETE'])

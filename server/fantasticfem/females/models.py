@@ -1,3 +1,11 @@
 from django.db import models
 
-# Create your models here.
+
+class Female(models.Model):
+
+    firstName = models.CharField(max_length=255)
+    lastName = models.CharField(max_length=255)
+    dateOfBirth = models.DateField()
+    zipCode = models.CharField(max_length=255)
+    bio = models.TextField()
+    fantasticBio = models.TextField()

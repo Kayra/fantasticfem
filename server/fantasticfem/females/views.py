@@ -33,14 +33,21 @@ def getRandomFemale(request):
 
 @api_view(['POST'])
 def createFemale(request):
-    pass
+
+    serializedFemale = FemaleSerializer(request.data)
+
+    if serializedFemale.is_valid():
+        serializedFemale.save()
+        return Response(serializedFemale.data)
+
+    return Response(serializedFemale.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST'])
+@api_view(['PUT'])
 def editFemale(request):
     pass
 
 
-@api_view(['POST'])
+@api_view(['DELETE'])
 def deleteFemale(request):
     pass

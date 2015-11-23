@@ -2,4 +2,34 @@
 
     var femaleAppServices = angular.module('femaleApp.services', []);
 
+    var host_name = "http://127.0.0.1:8000/"
+
+    femaleAppServices.factory("FemaleService", ['$http', function($http) {
+
+        var female = {};
+
+        female.getFemale = function() {
+
+        };
+
+        female.getRandomFemale = function() {
+
+        };
+
+        female.createFemale = function() {
+
+        };
+
+        female.editFemale = function() {
+
+        };
+
+        female.deleteFemale = function() {
+
+        };
+
+        return female;
+
+    }]);
+
 })();

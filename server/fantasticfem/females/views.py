@@ -34,7 +34,7 @@ def getRandomFemale(request):
 @api_view(['POST'])
 def createFemale(request):
 
-    serializedFemale = FemaleSerializer(request.data)
+    serializedFemale = FemaleSerializer(data=request.data)
 
     if serializedFemale.is_valid():
         serializedFemale.save()

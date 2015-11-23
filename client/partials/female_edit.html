@@ -1,0 +1,19 @@
+<form method="PUT" action="" ng-controller="FemaleEditController as edit">
+
+    <input name="first_name" ng-model="edit.first_name" type="text" maxlength="255">
+
+    <input name="second_name" ng-model="edit.second_name" type="text" maxlength="255">
+
+    <input name="date_of_birth" ng-model="edit.date_of_birth" type="text" maxlength="8">
+
+    <input name="zip_code" ng-model="edit.zip_code" type="text" maxlength="10">
+
+    <textarea name="bio" ng-model="edit.bio"></textarea>
+
+    <textarea name="fantastic_bio" ng-model="edit.fantastic_bio"></textarea>
+
+    <input type="submit" ng-click="edit.submit($event)" text="Save Changes">
+
+    <button type="button" ng-click="edit.delete()">Delete Female</button>
+
+</form>

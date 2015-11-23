@@ -21,6 +21,25 @@
 
     .controller('FemaleCreateController', function(){
 
+        var ctrl = this;
+
+        ctrl.submit = function($event) {
+
+            $event.preventDefault();
+
+            var femaleObject = {};
+
+            femaleObject.firstName = ctrl.first_name;
+            femaleObject.lastName = ctrl.last_name;
+            femaleObject.dateOfBirth = ctrl.date_of_birth;
+            femaleObject.zipCode = ctrl.zip_code;
+            femaleObject.bio = ctrl.bio;
+            femaleObject.fantasticBio = ctrl.fantastic_bio;
+
+            console.log(femaleObject);
+
+        }
+
     })
 
     .controller('FemaleEditController', function(){

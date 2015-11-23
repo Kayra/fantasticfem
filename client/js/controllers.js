@@ -19,9 +19,15 @@
 
     })
 
-    .controller('FemaleCreateController', function(){
+    .controller('FemaleCreateController', ['FemaleService', function(FemaleService){
 
         var vm = this;
+
+        vm.createFemaleService = function(femaleJsonObject) {
+            FemaleService.createFemale(femaleJsonObject).then(function(response){
+                console.log(response)
+            });
+        };
 
         vm.submit = function($event) {
 
@@ -38,9 +44,14 @@
 
             console.log(femaleObject);
 
+            var femaleJsonObject = angular.toJson(femaleObject);
+
+            vm.createFemaleService(femaleJsonObject);
+
         }
 
-    })
+    }])
+
 
     .controller('FemaleEditController', function(){
 

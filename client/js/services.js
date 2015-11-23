@@ -16,7 +16,9 @@
 
         };
 
-        female.createFemale = function() {
+        female.createFemale = function(femaleJsonObject) {
+
+            return $http.post(domain + 'females/create', femaleJsonObject);
 
         };
 

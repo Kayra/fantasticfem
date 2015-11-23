@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'localflavor',
     'fantasticfem.females',
 )
@@ -106,3 +107,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/fantasticfem/static/'
+
+# CORS Settings
+# MAKE SURE THIS IS NOT TRUE WHEN YOU HAVE DEPLOYED
+CORS_ORIGIN_ALLOW_ALL = True

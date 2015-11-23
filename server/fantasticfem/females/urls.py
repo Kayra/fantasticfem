@@ -4,9 +4,9 @@ from . import views
 
 urlpatterns = [
 
-    url(r'^get', views.getFemale, name='get_female'),
+    url(r'^get-random', views.getRandomFemale, name='get_random_female'),
 
-    url(r'^get_random', views.getRandomFemale, name='get_random_female'),
+    url(r'^get', views.getFemale, name='get_female'),
 
     url(r'^create', views.createFemale, name='create_female'),
 

@@ -9,6 +9,17 @@ from .serializers import FemaleSerializer
 
 
 @api_view(['GET'])
+def getRandomFemale(request):
+
+    last = Female.objects.count() - 1
+    randomIndex = random.randint(0, last)
+    randomFemale = Female.objects.all()[randomIndex]
+
+    serializedFemale = FemaleSerializer(randomFemale)
+    return Response(serializedFemale.data)
+
+
+@api_view(['GET'])
 def getFemale(request):
 
     try:
@@ -17,17 +28,6 @@ def getFemale(request):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     serializedFemale = FemaleSerializer(female)
-    return Response(serializedFemale.data)
-
-
-@api_view(['GET'])
-def getRandomFemale(request):
-
-    last = Female.objects.count() - 1
-    randomIndex = random.randint(0, last)
-    randomFemale = Female.objects.all()[randomIndex]
-
-    serializedFemale = FemaleSerializer(randomFemale)
     return Response(serializedFemale.data)
 
 

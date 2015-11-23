@@ -14,7 +14,7 @@
 
         female.getRandomFemale = function() {
 
-            return $http.get(host_name + 'females/get_random');
+            return $http.get(host_name + 'females/get-random');
 
         };
 

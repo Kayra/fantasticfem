@@ -108,6 +108,18 @@ USE_TZ = True
 
 STATIC_URL = '/fantasticfem/static/'
 
-# CORS Settings
+
+# Rest framework settings
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ]
+}
+
+
+# CORS settings
 # MAKE SURE THIS IS NOT TRUE WHEN YOU HAVE DEPLOYED
 CORS_ORIGIN_ALLOW_ALL = True

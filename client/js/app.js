@@ -21,14 +21,17 @@
 
         $stateProvider
             .state('female_display', {
+                url: '/',
                 templateUrl: 'partials/female_display.html',
                 controller: 'FemaleDisplayController'
             })
             .state('female_create', {
+                url: '/create',
                 templateUrl: 'partials/female_create.html',
                 controller: 'FemaleCreateController'
             })
             .state('female_edit', {
+                url: '/edit/:female',
                 templateUrl: 'partials/female_edit.html',
                 controller: 'FemaleEditController'
             });

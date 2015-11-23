@@ -1,16 +1,28 @@
 <form method="PUT" action="" ng-controller="FemaleEditController as edit">
 
-    <input name="first_name" ng-model="edit.first_name" type="text" maxlength="255">
+<div class="form-group">
+    <input name="first_name" ng-model="edit.first_name" type="text" maxlength="255" class="form-control">
+</div>
 
-    <input name="second_name" ng-model="edit.second_name" type="text" maxlength="255">
+<div class="form-group">
+    <input name="second_name" ng-model="edit.second_name" type="text" maxlength="255" class="form-control">
+</div>
 
-    <input name="date_of_birth" ng-model="edit.date_of_birth" type="text" maxlength="8">
+<div class="form-group">
+    <input name="date_of_birth" ng-model="edit.date_of_birth" type="text" maxlength="8" class="form-control">
+</div>
 
-    <input name="zip_code" ng-model="edit.zip_code" type="text" maxlength="10">
+<div class="form-group">
+    <input name="zip_code" ng-model="edit.zip_code" type="text" maxlength="10" class="form-control">
+</div>
 
-    <textarea name="bio" ng-model="edit.bio"></textarea>
+<div class="form-group">
+    <textarea name="bio" ng-model="edit.bio" class="form-control"></textarea>
+</div>
 
-    <textarea name="fantastic_bio" ng-model="edit.fantastic_bio"></textarea>
+<div class="form-group">
+    <textarea name="fantastic_bio" ng-model="edit.fantastic_bio" class="form-control"></textarea>
+</div>
 
     <input type="submit" ng-click="edit.submit($event)" text="Save Changes">
 

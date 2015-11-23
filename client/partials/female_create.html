@@ -1,17 +1,29 @@
 <form method="POST" action="" ng-controller="FemaleCreateController as create">
 
-    <input name="first_name" ng-model="create.first_name" type="text" maxlength="255" placeholder="First Name">
+<div class="form-group">
+    <input name="first_name" ng-model="create.first_name" type="text" maxlength="255" placeholder="First Name" class="form-control">
+</div>
 
-    <input name="second_name" ng-model="create.second_name" type="text" maxlength="255" placeholder="Second Name">
+<div class="form-group">
+    <input name="second_name" ng-model="create.second_name" type="text" maxlength="255" placeholder="Second Name" class="form-control">
+</div>
 
-    <input name="date_of_birth" ng-model="create.date_of_birth" type="text" maxlength="8" placeholder="00/00/00">
+<div class="form-group">
+    <input name="date_of_birth" ng-model="create.date_of_birth" type="text" maxlength="8" placeholder="00/00/00" class="form-control">
+</div>
 
-    <input name="zip_code" ng-model="create.zip_code" type="text" maxlength="10" placeholder="10003">
+<div class="form-group">
+    <input name="zip_code" ng-model="create.zip_code" type="text" maxlength="10" placeholder="10003" class="form-control">
+</div>
 
-    <textarea name="bio" ng-model="create.bio" placeholder="Bio"></textarea>
+<div class="form-group">
+    <textarea name="bio" ng-model="create.bio" placeholder="Bio" class="form-control"></textarea>
+</div>
 
-    <textarea name="fantastic_bio" ng-model="create.fantastic_bio" placeholder="Reason for being so fantastic"></textarea>
+<div class="form-group">
+    <textarea name="fantastic_bio" ng-model="create.fantastic_bio" placeholder="Reason for being so fantastic" class="form-control"></textarea>
+</div>
 
-    <input type="submit" ng-click="create.submit($event)" text="Create female">
+    <button type="submit" ng-click="create.submit($event)" class="btn btn-primary">Create female</button>
 
 </form>

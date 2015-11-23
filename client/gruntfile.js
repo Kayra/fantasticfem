@@ -23,6 +23,7 @@ module.exports = function(grunt) {
                     src: [
                         "styles/css/styles.css",
                         "*.html",
+                        "partials/*.html",
                         "js/*.js"
                     ]
                 },

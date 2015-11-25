@@ -63,6 +63,14 @@
 
     .controller('FemaleEditController', function(){
 
+        var vm = this;
+
+        vm.editFemaleService = function(femaleJsonObject) {
+            FemaleService.editFemale(femaleJsonObject).then(function(response){
+                console.log(response);
+            });
+        };
+
     });
 
 })();

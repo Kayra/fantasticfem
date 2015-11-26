@@ -25,6 +25,11 @@
                 templateUrl: 'partials/female_display.html',
                 controller: 'FemaleDisplayController'
             })
+            .state('female_list', {
+                url: '/list',
+                templateUrl: 'partials/female_list.html',
+                controller: 'FemaleListController'
+            })
             .state('female_create', {
                 url: '/create',
                 templateUrl: 'partials/female_create.html',

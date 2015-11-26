@@ -2,7 +2,7 @@
 
     var femaleAppControllers = angular.module('femaleApp.controllers', [])
 
-    .controller('FemaleDisplayController', ['FemaleService', function(FemaleService){
+    .controller('FemaleDisplayController', ['FemaleService', function(FemaleService) {
 
         var vm = this;
 
@@ -27,7 +27,23 @@
     }])
 
 
-    .controller('FemaleCreateController', ['FemaleService', function(FemaleService){
+    .controller('FemaleListController', ['FemaleService', function(FemaleService) {
+
+        var vm = this;
+
+        vm.getFemaleListService = function() {
+            FemaleService.getFemaleList.then(function(response) {
+                console.log(response.data);
+                vm.females = response.data;
+            });
+        };
+
+        vm.getFemaleListService();
+
+    }])
+
+
+    .controller('FemaleCreateController', ['FemaleService', function(FemaleService) {
 
         var vm = this;
 
@@ -61,7 +77,7 @@
     }])
 
 
-    .controller('FemaleEditController', function(){
+    .controller('FemaleEditController', function() {
 
         var vm = this;
 

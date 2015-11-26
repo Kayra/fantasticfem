@@ -31,6 +31,20 @@ def getFemale(request):
     return Response(serializedFemale.data)
 
 
+@api_view(['GET'])
+def listFemales(request):
+
+    try:
+
+        females = Female.objects.all()
+        serializedFemales = FemaleSerializer(females, many=True)
+
+        return Response(serializedFemales.data)
+
+    except Female.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+
 @api_view(['POST'])
 def createFemale(request):
 

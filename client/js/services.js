@@ -16,6 +16,10 @@
             return $http.get(host_name + 'females/get-random');
         };
 
+        female.getFemaleList = function() {
+            return $http.get(host_name + 'females/list');
+        }
+
         female.createFemale = function(femaleJsonObject) {
             return $http.post(host_name + 'females/create', femaleJsonObject);
         };

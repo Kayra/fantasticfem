@@ -32,7 +32,7 @@
         var vm = this;
 
         vm.getFemaleListService = function() {
-            FemaleService.getFemaleList.then(function(response) {
+            FemaleService.getFemaleList().then(function(response) {
                 console.log(response.data);
                 vm.females = response.data;
             });

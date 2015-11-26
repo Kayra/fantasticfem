@@ -23,22 +23,22 @@
             .state('female_display', {
                 url: '/',
                 templateUrl: 'partials/female_display.html',
-                controller: 'FemaleDisplayController'
+                controller: 'FemaleDisplayController as display'
             })
             .state('female_list', {
                 url: '/list',
                 templateUrl: 'partials/female_list.html',
-                controller: 'FemaleListController'
+                controller: 'FemaleListController as list'
             })
             .state('female_create', {
                 url: '/create',
                 templateUrl: 'partials/female_create.html',
-                controller: 'FemaleCreateController'
+                controller: 'FemaleCreateController as create'
             })
             .state('female_edit', {
                 url: '/edit/:female',
                 templateUrl: 'partials/female_edit.html',
-                controller: 'FemaleEditController'
+                controller: 'FemaleEditController as edit'
             });
 
         $urlRouterProvider.otherwise('/');

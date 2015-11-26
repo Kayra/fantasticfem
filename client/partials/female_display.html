@@ -1,15 +1,12 @@
-<div ng-controller="FemaleDisplayController as display">
+<h1>{{display.first_name}} {{display.last_name}}</h1>
 
-    <h1>{{display.first_name}} {{display.last_name}}</h1>
+<p>Born: {{display.date_of_birth}}</p>
 
-    <p>Born: {{display.date_of_birth}}</p>
+<p>Zipcode: {{display.zip_code}}</p>
 
-    <p>Zipcode: {{display.zip_code}}</p>
+<p>{{display.bio}}</p>
 
-    <p>{{display.bio}}</p>
+<p>{{display.fantastic_bio}}</p>
 
-    <p>{{display.fantastic_bio}}</p>
+<a href="/create">Add another female</a>
 
-    <a href="/create">Add another female</a>
-
-</div>

@@ -8,8 +8,8 @@
 
         var female = {};
 
-        female.getFemale = function() {
-
+        female.getFemale = function(femalePrimaryKey) {
+            return $http.get(host_name + 'females/get', femalePrimaryKey);
         };
 
         female.getRandomFemale = function() {

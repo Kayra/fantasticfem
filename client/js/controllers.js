@@ -26,6 +26,36 @@
 
     }])
 
+    .controller('FemaleDetailController', ['FemaleService', '$location', function(FemaleService, $location) {
+
+        var vm = this;
+
+        vm.getFemaleName = function(url) {
+            return url.split('/')[2].split('_');
+        }
+
+        vm.injectRandomFemale = function(data) {
+            vm.first_name = data.firstName;
+            vm.last_name = data.lastName;
+            vm.date_of_birth = data.dateOfBirth;
+            vm.zip_code = data.zipCode;
+            vm.bio = data.bio;
+            vm.fantastic_bio = data.fantasticBio;
+        };
+
+        vm.getFemaleService = function(firstName, lastName) {
+            FemaleService.getFemale(firstName, lastName).then(function(response) {
+                console.log(response.data);
+                vm.injectRandomFemale(response.data);
+            });
+        };
+
+        var fullNameArray = vm.getFemaleName($location.url());
+
+        vm.getFemaleService(fullNameArray[0], fullNameArray[1]);
+
+    }])
+
 
     .controller('FemaleListController', ['FemaleService', function(FemaleService) {
 

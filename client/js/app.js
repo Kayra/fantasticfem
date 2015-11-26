@@ -22,27 +22,27 @@
         $stateProvider
             .state('female_display', {
                 url: '/',
-                templateUrl: 'partials/female_display.html',
+                templateUrl: '/partials/female_display.html',
                 controller: 'FemaleDisplayController as display'
             })
             .state('female_detail', {
-                url: '/:female',
-                templateUrl: 'partials/female_detail.html',
+                url: '/detail/:female',
+                templateUrl: '/partials/female_detail.html',
                 controller: 'FemaleDetailController as detail'
             })
             .state('female_list', {
                 url: '/list',
-                templateUrl: 'partials/female_list.html',
+                templateUrl: '/partials/female_list.html',
                 controller: 'FemaleListController as list'
             })
             .state('female_create', {
                 url: '/create',
-                templateUrl: 'partials/female_create.html',
+                templateUrl: '/partials/female_create.html',
                 controller: 'FemaleCreateController as create'
             })
             .state('female_edit', {
                 url: '/edit/:female',
-                templateUrl: 'partials/female_edit.html',
+                templateUrl: '/partials/female_edit.html',
                 controller: 'FemaleEditController as edit'
             });
 

@@ -35,7 +35,6 @@ def getFemale(request):
 def getFemaleList(request):
 
     try:
-
         females = Female.objects.all()
         serializedFemales = FemaleSerializer(females, many=True)
 

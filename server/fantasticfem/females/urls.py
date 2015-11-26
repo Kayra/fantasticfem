@@ -8,7 +8,7 @@ urlpatterns = [
 
     url(r'^get', views.getFemale, name='get_female'),
 
-    url(r'^list', views.listFemales, name='list_females'),
+    url(r'^list', views.getFemaleList, name='get_female_list'),
 
     url(r'^create', views.createFemale, name='create_female'),
 

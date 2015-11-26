@@ -32,7 +32,7 @@ def getFemale(request):
 
 
 @api_view(['GET'])
-def listFemales(request):
+def getFemaleList(request):
 
     try:
 

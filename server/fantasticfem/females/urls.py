@@ -8,6 +8,8 @@ urlpatterns = [
 
     url(r'^get', views.getFemale, name='get_female'),
 
+    url(r'^list', views.listFemales, name='list_females'),
+
     url(r'^create', views.createFemale, name='create_female'),
 
     url(r'^edit', views.editFemale, name='edit_female'),

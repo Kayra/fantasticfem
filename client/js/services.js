@@ -29,7 +29,7 @@
             return $http.post(host_name + 'females/create', femaleJsonObject);
         };
 
-        female.editFemale = function() {
+        female.editFemale = function(femaleJsonObject) {
             return $http.post(host_name + 'females/edit', femaleJsonObject);
         };
 

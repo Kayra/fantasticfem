@@ -63,7 +63,7 @@ def createFemale(request):
 def editFemale(request):
 
     try:
-        female = Female.objects.get(pk=request.data['pk'])
+        female = Female.objects.get(firstName=request.data['firstName'], lastName=request.data['lastName'])
     except Female.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 

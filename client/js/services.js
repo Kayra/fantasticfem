@@ -30,7 +30,7 @@
         };
 
         female.editFemale = function(femaleJsonObject) {
-            return $http.post(host_name + 'females/edit', femaleJsonObject);
+            return $http.put(host_name + 'females/edit', femaleJsonObject);
         };
 
         female.deleteFemale = function() {

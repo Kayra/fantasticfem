@@ -26,6 +26,7 @@
 
     }])
 
+
     .controller('FemaleDetailController', ['FemaleService', '$location', function(FemaleService, $location) {
 
         var vm = this;
@@ -107,9 +108,29 @@
     }])
 
 
-    .controller('FemaleEditController', function() {
+    .controller('FemaleEditController', ['FemaleService', '$location', function(FemaleService, $location) {
 
         var vm = this;
+
+        vm.getFemaleName = function(url) {
+            return url.split('/')[2].split('_');
+        }
+
+        vm.injectRandomFemale = function(data) {
+            vm.first_name = data.firstName;
+            vm.last_name = data.lastName;
+            vm.date_of_birth = data.dateOfBirth;
+            vm.zip_code = data.zipCode;
+            vm.bio = data.bio;
+            vm.fantastic_bio = data.fantasticBio;
+        };
+
+        vm.getFemaleService = function(firstName, lastName) {
+            FemaleService.getFemale(firstName, lastName).then(function(response) {
+                console.log(response.data);
+                vm.injectRandomFemale(response.data);
+            });
+        };
 
         vm.editFemaleService = function(femaleJsonObject) {
             FemaleService.editFemale(femaleJsonObject).then(function(response){
@@ -117,6 +138,31 @@
             });
         };
 
-    });
+        vm.submit = function($event) {
+
+            $event.preventDefault();
+
+            var femaleObject = {};
+
+            femaleObject.firstName = vm.first_name;
+            femaleObject.lastName = vm.last_name;
+            femaleObject.dateOfBirth = vm.date_of_birth;
+            femaleObject.zipCode = vm.zip_code;
+            femaleObject.bio = vm.bio;
+            femaleObject.fantasticBio = vm.fantastic_bio;
+
+            console.log(femaleObject);
+
+            var femaleJsonObject = angular.toJson(femaleObject);
+
+            vm.editFemaleService(femaleJsonObject);
+
+        }
+
+        var fullNameArray = vm.getFemaleName($location.url());
+
+        vm.getFemaleService(fullNameArray[0], fullNameArray[1]);
+
+    }]);
 
 })();

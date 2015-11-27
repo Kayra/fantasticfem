@@ -33,8 +33,8 @@
             return $http.put(host_name + 'females/edit', femaleJsonObject);
         };
 
-        female.deleteFemale = function() {
-
+        female.deleteFemale = function(femaleFullName) {
+            return $http.delete(host_name + 'females/delete', femaleFullName)
         };
 
         return female;

@@ -97,8 +97,6 @@
             femaleObject.bio = vm.bio;
             femaleObject.fantasticBio = vm.fantastic_bio;
 
-            console.log(femaleObject);
-
             var femaleJsonObject = angular.toJson(femaleObject);
 
             vm.createFemaleService(femaleJsonObject);
@@ -133,10 +131,16 @@
         };
 
         vm.editFemaleService = function(femaleJsonObject) {
-            FemaleService.editFemale(femaleJsonObject).then(function(response){
+            FemaleService.editFemale(femaleJsonObject).then(function(response) {
                 console.log(response);
             });
         };
+
+        vm.deleteFemaleService = function(firstName, lastName) {
+            FemaleService.deleteFemale(firstName, lastName).then(function(response) {
+                console.log(response);
+            })
+        }
 
         vm.submit = function($event) {
 
@@ -151,14 +155,20 @@
             femaleObject.bio = vm.bio;
             femaleObject.fantasticBio = vm.fantastic_bio;
 
-            console.log(femaleObject);
-
             var femaleJsonObject = angular.toJson(femaleObject);
 
             vm.editFemaleService(femaleJsonObject);
 
             var fullName = vm.first_name + '_' + vm.last_name;
             $state.go('female_detail', {female: fullName});
+
+        }
+
+        vm.delete = function() {
+
+            vm.deleteFemaleService(vm.first_name, vm.last_name);
+
+            $state.go('female_display');
 
         }
 

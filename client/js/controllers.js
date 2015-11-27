@@ -108,7 +108,7 @@
     }])
 
 
-    .controller('FemaleEditController', ['FemaleService', '$location', function(FemaleService, $location) {
+    .controller('FemaleEditController', ['FemaleService', '$location', '$state', function(FemaleService, $location, $state) {
 
         var vm = this;
 
@@ -156,6 +156,9 @@
             var femaleJsonObject = angular.toJson(femaleObject);
 
             vm.editFemaleService(femaleJsonObject);
+
+            var fullName = vm.first_name + '_' + vm.last_name;
+            $state.go('female_detail', {female: fullName});
 
         }
 

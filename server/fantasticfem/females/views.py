@@ -38,7 +38,7 @@ def getFemale(request):
 def getFemaleList(request):
 
     try:
-        females = Female.objects.all()
+        females = Female.objects.all().order_by('lastName')
         serializedFemales = FemaleSerializer(females, many=True)
 
         return Response(serializedFemales.data)
@@ -80,7 +80,7 @@ def editFemale(request):
 def deleteFemale(request):
 
     try:
-        female = Female.objects.get(pk=request.data['pk'])
+        female = Female.objects.get(firstName=request.data['firstName'], lastName=request.data['lastName'])
     except Female.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 

@@ -24,8 +24,10 @@
     <textarea name="fantastic_bio" ng-model="edit.fantastic_bio" class="form-control"></textarea>
 </div>
 
-    <input type="submit" ng-click="edit.submit($event)" text="Save Changes">
+    <input type="submit" ng-click="edit.submit($event)" text="Save Changes" class="btn btn-primary">
 
-    <button type="button" ng-click="edit.delete()">Delete Female</button>
+    <button type="button" ng-click="edit.delete()" class="btn btn-primary">Delete Female</button>
 
 </form>
+
+<a href="/detail/{{edit.first_name}}_{{edit.last_name}}" class="btn btn-primary">Return to female</a>

@@ -74,7 +74,7 @@
     }])
 
 
-    .controller('FemaleCreateController', ['FemaleService', function(FemaleService) {
+    .controller('FemaleCreateController', ['FemaleService', '$state', function(FemaleService, $state) {
 
         var vm = this;
 
@@ -100,6 +100,10 @@
             var femaleJsonObject = angular.toJson(femaleObject);
 
             vm.createFemaleService(femaleJsonObject);
+
+            var fullName = vm.first_name + "_" + vm.last_name;
+
+            $state.go('female_detail', {female: fullName});
 
         }
 

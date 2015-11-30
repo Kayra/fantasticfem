@@ -181,8 +181,8 @@
             });
         };
 
-        vm.deleteFemaleService = function(firstName, lastName) {
-            FemaleService.deleteFemale(firstName, lastName).then(function(response) {
+        vm.deleteFemaleService = function(id) {
+            FemaleService.deleteFemale(id).then(function(response) {
                 console.log(response);
             });
         };
@@ -216,7 +216,7 @@
 
         vm.delete = function() {
 
-            vm.deleteFemaleService(vm.first_name, vm.last_name);
+            vm.deleteFemaleService(vm.id);
 
             $state.go('female_display');
 

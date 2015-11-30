@@ -88,11 +88,10 @@ def editFemale(request):
 @api_view(['DELETE'])
 def deleteFemale(request):
 
-    firstName = request.GET.get("firstName", None)
-    lastName = request.GET.get("lastName", None)
-    print(firstName, lastName)
+    identifier = request.GET.get("id", None)
+
     try:
-        female = Female.objects.get(firstName=firstName, lastName=lastName)
+        female = Female.objects.get(pk=identifier)
     except Female.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 

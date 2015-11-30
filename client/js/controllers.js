@@ -32,7 +32,7 @@
     }])
 
 
-    .controller('FemaleDetailController', ['FemaleService', '$location', function(FemaleService, $location) {
+    .controller('FemaleDetailController', ['FemaleService', 'SharedProperties', '$location', function(FemaleService, SharedProperties, $location) {
 
         var vm = this;
 
@@ -47,6 +47,7 @@
             vm.zip_code = data.zipCode;
             vm.bio = data.bio;
             vm.fantastic_bio = data.fantasticBio;
+            vm.id = data.id;
         };
 
         vm.getFemaleService = function(firstName, lastName) {
@@ -54,6 +55,10 @@
                 console.log(response.data);
                 vm.injectRandomFemale(response.data);
             });
+        };
+
+        vm.setId = function(id) {
+            SharedProperties.setProperty(id);
         };
 
         var fullNameArray = vm.getFemaleName($location.url());

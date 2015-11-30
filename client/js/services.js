@@ -8,11 +8,10 @@
 
         var female = {};
 
-        female.getFemale = function(firstName, lastName) {
+        female.getFemale = function(id) {
             return $http.get(host_name + 'females/get', {
                 params: {
-                    firstName: firstName,
-                    lastName: lastName
+                    id: id,
                 }
             });
         };

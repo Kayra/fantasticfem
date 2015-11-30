@@ -22,11 +22,10 @@ def getRandomFemale(request):
 @api_view(['GET'])
 def getFemale(request):
 
-    firstName = request.GET.get("firstName", None)
-    lastName = request.GET.get("lastName", None)
+    femaleId = request.GET.get("id", None)
 
     try:
-        female = Female.objects.get(firstName=firstName, lastName=lastName)
+        female = Female.objects.get(pk=femaleId)
     except Female.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 

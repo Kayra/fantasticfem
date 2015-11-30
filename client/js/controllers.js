@@ -61,14 +61,21 @@
             SharedProperties.setProperty(id);
         };
 
+        vm.getId = function() {
+            return SharedProperties.getProperty();
+        };
+
         var fullNameArray = vm.getFemaleName($location.url());
 
         vm.getFemaleService(fullNameArray[0], fullNameArray[1]);
 
+        console.log(vm.getId());
+
+
     }])
 
 
-    .controller('FemaleListController', ['FemaleService', function(FemaleService) {
+    .controller('FemaleListController', ['FemaleService', 'SharedProperties', function(FemaleService, SharedProperties) {
 
         var vm = this;
 
@@ -77,6 +84,10 @@
                 console.log(response.data);
                 vm.females = response.data;
             });
+        };
+
+        vm.setId = function(id) {
+            SharedProperties.setProperty(id);
         };
 
         vm.getFemaleListService();

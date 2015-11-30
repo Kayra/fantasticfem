@@ -147,10 +147,18 @@
         var vm = this;
 
         vm.getFemaleName = function(url) {
-            return url.split('/')[2].split('_');
-        };
 
-        vm.injectRandomFemale = function(data) {
+            var fullNameObject = {};
+
+            var fullNameArray = url.split('/')[2].split('_');
+            fullNameObject.firstName = fullNameArray[0];
+            fullNameObject.lastName = fullNameArray[1];
+
+            return fullNameObject;
+
+        }
+
+        vm.injectFemale = function(data) {
             vm.first_name = data.firstName;
             vm.last_name = data.lastName;
             vm.date_of_birth = data.dateOfBirth;
@@ -163,7 +171,7 @@
         vm.getFemaleService = function(id) {
             FemaleService.getFemale(id).then(function(response) {
                 console.log(response.data);
-                vm.injectRandomFemale(response.data);
+                vm.injectFemale(response.data);
             });
         };
 
@@ -216,7 +224,13 @@
 
         var id = vm.getId();
 
-        vm.getFemaleService(id);
+        if (id) {
+            vm.getFemaleService(id);
+        } else {
+            var fullNameArray = vm.getFemaleName($location.url());
+            var fullNameJson = angular.toJson(fullNameArray);
+            vm.getFemaleService(fullNameJson);
+        }
 
     }]);
 

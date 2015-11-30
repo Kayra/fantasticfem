@@ -2,7 +2,7 @@
 
     var femaleAppControllers = angular.module('femaleApp.controllers', [])
 
-    .controller('FemaleDisplayController', ['FemaleService', function(FemaleService) {
+    .controller('FemaleDisplayController', ['FemaleService', 'SharedProperties', function(FemaleService, SharedProperties) {
 
         var vm = this;
 
@@ -13,6 +13,7 @@
             vm.zip_code = data.zipCode;
             vm.bio = data.bio;
             vm.fantastic_bio = data.fantasticBio;
+            vm.id = data.id;
         };
 
         vm.getRandomFemaleService = function() {
@@ -20,6 +21,10 @@
                 console.log(response.data);
                 vm.injectRandomFemale(response.data);
             });
+        };
+
+        vm.setId = function(id) {
+            SharedProperties.setProperty(id);
         };
 
         vm.getRandomFemaleService();
@@ -110,13 +115,13 @@
     }])
 
 
-    .controller('FemaleEditController', ['FemaleService', '$location', '$state', function(FemaleService, $location, $state) {
+    .controller('FemaleEditController', ['FemaleService', 'SharedProperties', '$location', '$state', function(FemaleService, SharedProperties, $location, $state) {
 
         var vm = this;
 
         vm.getFemaleName = function(url) {
             return url.split('/')[2].split('_');
-        }
+        };
 
         vm.injectRandomFemale = function(data) {
             vm.first_name = data.firstName;
@@ -143,8 +148,12 @@
         vm.deleteFemaleService = function(firstName, lastName) {
             FemaleService.deleteFemale(firstName, lastName).then(function(response) {
                 console.log(response);
-            })
-        }
+            });
+        };
+
+        vm.getId = function() {
+            return SharedProperties.getProperty();
+        };
 
         vm.submit = function($event) {
 
@@ -166,7 +175,7 @@
             var fullName = vm.first_name + '_' + vm.last_name;
             $state.go('female_detail', {female: fullName});
 
-        }
+        };
 
         vm.delete = function() {
 
@@ -174,11 +183,13 @@
 
             $state.go('female_display');
 
-        }
+        };
 
         var fullNameArray = vm.getFemaleName($location.url());
 
         vm.getFemaleService(fullNameArray[0], fullNameArray[1]);
+
+        console.log(vm.getId());
 
     }]);
 

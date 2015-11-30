@@ -53,12 +53,14 @@
         var value;
 
         property.getProperty = function() {
-            return value
+            return value;
         };
 
         property.setProperty = function(newValue) {
             value = newValue;
         };
+
+        return property;
 
     });
 

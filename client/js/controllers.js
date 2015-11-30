@@ -181,6 +181,7 @@
             femaleObject.zipCode = vm.zip_code;
             femaleObject.bio = vm.bio;
             femaleObject.fantasticBio = vm.fantastic_bio;
+            femaleObject.id = vm.id;
 
             var femaleJsonObject = angular.toJson(femaleObject);
 

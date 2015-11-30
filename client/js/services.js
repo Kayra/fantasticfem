@@ -23,7 +23,7 @@
 
         female.getFemaleList = function() {
             return $http.get(host_name + 'females/list');
-        }
+        };
 
         female.createFemale = function(femaleJsonObject) {
             return $http.post(host_name + 'females/create', femaleJsonObject);
@@ -45,5 +45,21 @@
         return female;
 
     }]);
+
+    femaleAppServices.factory("SharedProperties", function() {
+
+        var property = {};
+
+        var value;
+
+        property.getProperty = function() {
+            return value
+        };
+
+        property.setProperty = function(newValue) {
+            value = newValue;
+        };
+
+    });
 
 })();

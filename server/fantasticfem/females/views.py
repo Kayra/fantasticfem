@@ -1,4 +1,5 @@
 import random
+import json
 
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -22,12 +23,21 @@ def getRandomFemale(request):
 @api_view(['GET'])
 def getFemale(request):
 
-    femaleId = request.GET.get("id", None)
+    identifier = request.GET.get("identifier", None)
 
     try:
-        female = Female.objects.get(pk=femaleId)
-    except Female.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        float(identifier)
+        try:
+            female = Female.objects.get(pk=identifier)
+        except Female.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+    except ValueError:
+        fullName = json.loads(identifier)
+        try:
+            female = Female.objects.get(firstName=fullName['firstName'], lastName=fullName['lastName'])
+        except Female.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
     serializedFemale = FemaleSerializer(female)
     return Response(serializedFemale.data)

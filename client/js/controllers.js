@@ -32,12 +32,20 @@
     }])
 
 
-    .controller('FemaleDetailController', ['FemaleService', 'SharedProperties', function(FemaleService, SharedProperties) {
+    .controller('FemaleDetailController', ['FemaleService', 'SharedProperties', '$location', function(FemaleService, SharedProperties, $location) {
 
         var vm = this;
 
         vm.getFemaleName = function(url) {
-            return url.split('/')[2].split('_');
+
+            var fullNameObject = {};
+
+            var fullNameArray = url.split('/')[2].split('_');
+            fullNameObject.firstName = fullNameArray[0];
+            fullNameObject.lastName = fullNameArray[1];
+
+            return fullNameObject;
+
         }
 
         vm.injectRandomFemale = function(data) {
@@ -67,7 +75,13 @@
 
         var id = vm.getId();
 
-        vm.getFemaleService(id);
+        if (id) {
+            vm.getFemaleService(id);
+        } else {
+            var fullNameArray = vm.getFemaleName($location.url());
+            var fullNameJson = angular.toJson(fullNameArray);
+            vm.getFemaleService(fullNameJson);
+        }
 
     }])
 

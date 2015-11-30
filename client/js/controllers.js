@@ -143,10 +143,11 @@
             vm.zip_code = data.zipCode;
             vm.bio = data.bio;
             vm.fantastic_bio = data.fantasticBio;
+            vm.id = data.id;
         };
 
-        vm.getFemaleService = function(firstName, lastName) {
-            FemaleService.getFemale(firstName, lastName).then(function(response) {
+        vm.getFemaleService = function(id) {
+            FemaleService.getFemale(id).then(function(response) {
                 console.log(response.data);
                 vm.injectRandomFemale(response.data);
             });
@@ -198,11 +199,9 @@
 
         };
 
-        var fullNameArray = vm.getFemaleName($location.url());
+        var id = vm.getId();
 
-        vm.getFemaleService(fullNameArray[0], fullNameArray[1]);
-
-        console.log(vm.getId());
+        vm.getFemaleService(id);
 
     }]);
 

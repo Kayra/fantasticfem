@@ -116,9 +116,7 @@
             });
         };
 
-        vm.submit = function($event) {
-
-            $event.preventDefault();
+        vm.submit = function() {
 
             var femaleObject = {};
 

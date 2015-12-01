@@ -7,12 +7,12 @@
         var vm = this;
 
         vm.injectRandomFemale = function(data) {
-            vm.first_name = data.firstName;
-            vm.last_name = data.lastName;
-            vm.date_of_birth = data.dateOfBirth;
-            vm.zip_code = data.zipCode;
+            vm.firstName = data.firstName;
+            vm.lastName = data.lastName;
+            vm.dateOfBirth = data.dateOfBirth;
+            vm.zipCode = data.zipCode;
             vm.bio = data.bio;
-            vm.fantastic_bio = data.fantasticBio;
+            vm.fantasticBio = data.fantasticBio;
             vm.id = data.id;
         };
 
@@ -49,12 +49,12 @@
         }
 
         vm.injectRandomFemale = function(data) {
-            vm.first_name = data.firstName;
-            vm.last_name = data.lastName;
-            vm.date_of_birth = data.dateOfBirth;
-            vm.zip_code = data.zipCode;
+            vm.firstName = data.firstName;
+            vm.lastName = data.lastName;
+            vm.dateOfBirth = data.dateOfBirth;
+            vm.zipCode = data.zipCode;
             vm.bio = data.bio;
-            vm.fantastic_bio = data.fantasticBio;
+            vm.fantasticBio = data.fantasticBio;
             vm.id = data.id;
         };
 
@@ -122,18 +122,18 @@
 
             var femaleObject = {};
 
-            femaleObject.firstName = vm.first_name;
-            femaleObject.lastName = vm.last_name;
-            femaleObject.dateOfBirth = vm.date_of_birth;
-            femaleObject.zipCode = vm.zip_code;
+            femaleObject.firstName = vm.firstName;
+            femaleObject.lastName = vm.lastName;
+            femaleObject.dateOfBirth = vm.dateOfBirth;
+            femaleObject.zipCode = vm.zipCode;
             femaleObject.bio = vm.bio;
-            femaleObject.fantasticBio = vm.fantastic_bio;
+            femaleObject.fantasticBio = vm.fantasticBio;
 
             var femaleJsonObject = angular.toJson(femaleObject);
 
             vm.createFemaleService(femaleJsonObject);
 
-            var fullName = vm.first_name + "_" + vm.last_name;
+            var fullName = vm.firstName + "_" + vm.lastName;
 
             $state.go('female_detail', {female: fullName});
 
@@ -159,12 +159,12 @@
         }
 
         vm.injectFemale = function(data) {
-            vm.first_name = data.firstName;
-            vm.last_name = data.lastName;
-            vm.date_of_birth = data.dateOfBirth;
-            vm.zip_code = data.zipCode;
+            vm.firstName = data.firstName;
+            vm.lastName = data.lastName;
+            vm.dateOfBirth = data.dateOfBirth;
+            vm.zipCode = data.zipCode;
             vm.bio = data.bio;
-            vm.fantastic_bio = data.fantasticBio;
+            vm.fantasticBio = data.fantasticBio;
             vm.id = data.id;
         };
 
@@ -197,19 +197,19 @@
 
             var femaleObject = {};
 
-            femaleObject.firstName = vm.first_name;
-            femaleObject.lastName = vm.last_name;
-            femaleObject.dateOfBirth = vm.date_of_birth;
-            femaleObject.zipCode = vm.zip_code;
+            femaleObject.firstName = vm.firstName;
+            femaleObject.lastName = vm.lastName;
+            femaleObject.dateOfBirth = vm.dateOfBirth;
+            femaleObject.zipCode = vm.zipCode;
             femaleObject.bio = vm.bio;
-            femaleObject.fantasticBio = vm.fantastic_bio;
+            femaleObject.fantasticBio = vm.fantasticBio;
             femaleObject.id = vm.id;
 
             var femaleJsonObject = angular.toJson(femaleObject);
 
             vm.editFemaleService(femaleJsonObject);
 
-            var fullName = vm.first_name + '_' + vm.last_name;
+            var fullName = vm.firstName + '_' + vm.lastName;
             $state.go('female_detail', {female: fullName});
 
         };

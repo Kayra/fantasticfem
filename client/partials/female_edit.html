@@ -1,19 +1,19 @@
 <form method="PUT" action="">
 
 <div class="form-group">
-    <input name="first_name" ng-model="edit.first_name" type="text" maxlength="255" class="form-control">
+    <input name="firstName" ng-model="edit.firstName" type="text" maxlength="255" class="form-control">
 </div>
 
 <div class="form-group">
-    <input name="last_name" ng-model="edit.last_name" type="text" maxlength="255" class="form-control">
+    <input name="lastName" ng-model="edit.lastName" type="text" maxlength="255" class="form-control">
 </div>
 
 <div class="form-group">
-    <input name="date_of_birth" ng-model="edit.date_of_birth" type="text" maxlength="10" class="form-control">
+    <input name="dateOfBirth" ng-model="edit.dateOfBirth" type="text" maxlength="10" class="form-control">
 </div>
 
 <div class="form-group">
-    <input name="zip_code" ng-model="edit.zip_code" type="text" maxlength="10" class="form-control">
+    <input name="zipCode" ng-model="edit.zipCode" type="text" maxlength="10" class="form-control">
 </div>
 
 <div class="form-group">
@@ -21,7 +21,7 @@
 </div>
 
 <div class="form-group">
-    <textarea name="fantastic_bio" ng-model="edit.fantastic_bio" class="form-control"></textarea>
+    <textarea name="fantasticBio" ng-model="edit.fantasticBio" class="form-control"></textarea>
 </div>
 
     <input type="submit" ng-click="edit.submit($event)" text="Save Changes" class="btn btn-primary">
@@ -30,4 +30,4 @@
 
 </form>
 
-<a href="/detail/{{edit.first_name}}_{{edit.last_name}}" class="btn btn-primary">Return to {{edit.first_name}} {{edit.last_name}}</a>
+<a href="/detail/{{edit.firstName}}_{{edit.lastName}}" class="btn btn-primary">Return to {{edit.firstName}} {{edit.lastName}}</a>

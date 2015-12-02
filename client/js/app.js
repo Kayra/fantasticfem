@@ -43,7 +43,7 @@
                 controller: 'FemaleCreateController as create'
             })
             .state('female_edit', {
-                url: '/edit/:female',
+                url: '/edit',
                 templateUrl: '/partials/female_edit.html',
                 controller: 'FemaleEditController as edit'
             });

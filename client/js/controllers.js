@@ -144,18 +144,6 @@
 
         var vm = this;
 
-        vm.getFemaleName = function(url) {
-
-            var fullNameObject = {};
-
-            var fullNameArray = url.split('/')[2].split('_');
-            fullNameObject.firstName = fullNameArray[0];
-            fullNameObject.lastName = fullNameArray[1];
-
-            return fullNameObject;
-
-        }
-
         vm.injectFemale = function(data) {
             vm.firstName = data.firstName;
             vm.lastName = data.lastName;
@@ -223,9 +211,7 @@
         if (id) {
             vm.getFemaleService(id);
         } else {
-            var fullNameArray = vm.getFemaleName($location.url());
-            var fullNameJson = angular.toJson(fullNameArray);
-            vm.getFemaleService(fullNameJson);
+            $state.go('female_display');
         }
 
     }]);

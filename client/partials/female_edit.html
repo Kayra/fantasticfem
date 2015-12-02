@@ -1,30 +1,128 @@
-<form method="PUT" action="">
+<form name="femaleEdit" novalidate ng-submit="edit.submit()">
 
-<div class="form-group">
-    <input name="firstName" ng-model="edit.firstName" type="text" maxlength="255" class="form-control">
-</div>
+    <div class="form-group">
+        <input name="firstName"
+        ng-model="edit.firstName"
+        required
+        ng-maxlength="255"
+        type="text"
+        placeholder="First Name"
+        class="form-control">
+    </div>
 
-<div class="form-group">
-    <input name="lastName" ng-model="edit.lastName" type="text" maxlength="255" class="form-control">
-</div>
+    <div class="error"
+    ng-show="femaleEdit.firstName.$dirty && femaleEdit.firstName.$invalid">
+        <small class="error"
+        ng-show="femaleEdit.firstName.$error.required">
+            Please enter a first name.
+        </small>
+        <small class="error"
+        ng-show="femaleEdit.firstName.$error.maxlength">
+            The maximum allowed length for the first name is 255 characters.
+        </small>
+    </div>
 
-<div class="form-group">
-    <input name="dateOfBirth" ng-model="edit.dateOfBirth" type="text" maxlength="10" class="form-control">
-</div>
+    <div class="form-group">
+        <input name="lastName"
+        ng-model="edit.lastName"
+        required
+        ng-maxlength="255"
+        type="text"
+        placeholder="Last Name"
+        class="form-control">
+    </div>
 
-<div class="form-group">
-    <input name="zipCode" ng-model="edit.zipCode" type="text" maxlength="10" class="form-control">
-</div>
+    <div class="error"
+    ng-show="femaleEdit.lastName.$dirty && femaleEdit.lastName.$invalid">
+        <small class="error"
+        ng-show="femaleEdit.lastName.$error.required">
+            Please enter a last name.
+        </small>
+        <small class="error"
+        ng-show="femaleEdit.lastName.$error.maxlength">
+            The maximum allowed length for the last name is 255 characters.
+        </small>
+    </div>
 
-<div class="form-group">
-    <textarea name="bio" ng-model="edit.bio" class="form-control"></textarea>
-</div>
+    <div class="form-group">
+        <input name="dateOfBirth"
+        ng-model="edit.dateOfBirth"
+        required
+        ng-pattern="/^\d{4}[-]\d{2}[-]\d{2}$/"
+        type="text"
+        maxlength="10"
+        placeholder="YYYY-MM-DD"
+        class="form-control">
+    </div>
 
-<div class="form-group">
-    <textarea name="fantasticBio" ng-model="edit.fantasticBio" class="form-control"></textarea>
-</div>
+    <div class="error"
+    ng-show="femaleEdit.dateOfBirth.$dirty && femaleEdit.dateOfBirth.$invalid">
+        <small class="error"
+        ng-show="femaleEdit.dateOfBirth.$error.required">
+            Please enter a date of birth.
+        </small>
+        <small class="error"
+        ng-show="femaleEdit.dateOfBirth.$error.pattern">
+            Please enter the date in the format YYYY-MM-DD
+        </small>
+    </div>
 
-    <input type="submit" ng-click="edit.submit($event)" text="Save Changes" class="btn btn-primary">
+    <div class="form-group">
+        <input name="zipCode"
+        ng-model="edit.zipCode"
+        required
+        ng-pattern="/(^\d{5}$)|(^\d{5}-\d{4}$)/"
+        maxlength="5"
+        type="text"
+        placeholder="XXXXX"
+        class="form-control">
+    </div>
+
+    <div class="error"
+    ng-show="femaleEdit.zipCode.$dirty && femaleEdit.zipCode.$invalid">
+        <small class="error"
+        ng-show="femaleEdit.zipCode.$error.required">
+            Please enter a zipcode.
+        </small>
+        <small class="error"
+        ng-show="femaleEdit.zipCode.$error.pattern">
+            Please enter the date in the US format of XXXXX
+        </small>
+    </div>
+
+    <div class="form-group">
+        <textarea name="bio"
+        ng-model="edit.bio"
+        required
+        placeholder="Bio"
+        class="form-control"></textarea>
+    </div>
+
+    <div class="error"
+    ng-show="femaleEdit.bio.$dirty && femaleEdit.bio.$invalid">
+        <small class="error"
+        ng-show="femaleEdit.bio.$error.required">
+            Please enter a bio.
+        </small>
+    </div>
+
+    <div class="form-group">
+        <textarea name="fantasticBio"
+        ng-model="edit.fantasticBio"
+        required
+        placeholder="Reason for being so fantastic"
+        class="form-control"></textarea>
+    </div>
+
+    <div class="error"
+    ng-show="femaleEdit.fantasticBio.$dirty && femaleEdit.fantasticBio.$invalid">
+        <small class="error"
+        ng-show="femaleEdit.fantasticBio.$error.required">
+            Please enter a reason this female is considered fantastic.
+        </small>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save changes</button>
 
     <button type="button" ng-click="edit.delete()" class="btn btn-primary">Delete Female</button>
 

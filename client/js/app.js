@@ -3,6 +3,7 @@
     var app = angular.module('femaleApp', [
         'ui.router',
         'ngResource',
+        'ngMessages',
         'femaleApp.services',
         'femaleApp.controllers',
         'femaleApp.directives'

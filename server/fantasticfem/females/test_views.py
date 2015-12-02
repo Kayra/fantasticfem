@@ -5,13 +5,18 @@ from django.test import TestCase
 
 from .models import Female
 
+
 class FemaleAPITests(TestCase):
 
     def setUp(self):
         pass
 
     def test_getRandomFemale(self):
-        pass
+        url = reverse('get_random_female')
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
+        data = json.loads(response.content)
+        self.assertEquals(len(data), 1)
 
     def test_getFemale(self):
         pass

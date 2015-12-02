@@ -5,13 +5,14 @@
         ng-model="edit.firstName"
         required
         ng-maxlength="255"
+        ng-focus
         type="text"
         placeholder="First Name"
         class="form-control">
     </div>
 
     <div class="error"
-    ng-show="femaleEdit.firstName.$dirty && femaleEdit.firstName.$invalid">
+    ng-show="femaleEdit.firstName.$dirty && femaleEdit.firstName.$invalid && !femaleEdit.firstName.$focused">
         <small class="error"
         ng-show="femaleEdit.firstName.$error.required">
             Please enter a first name.
@@ -27,13 +28,14 @@
         ng-model="edit.lastName"
         required
         ng-maxlength="255"
+        ng-focus
         type="text"
         placeholder="Last Name"
         class="form-control">
     </div>
 
     <div class="error"
-    ng-show="femaleEdit.lastName.$dirty && femaleEdit.lastName.$invalid">
+    ng-show="femaleEdit.lastName.$dirty && femaleEdit.lastName.$invalid && !femaleEdit.lastName.$focused">
         <small class="error"
         ng-show="femaleEdit.lastName.$error.required">
             Please enter a last name.
@@ -49,6 +51,7 @@
         ng-model="edit.dateOfBirth"
         required
         ng-pattern="/^\d{4}[-]\d{2}[-]\d{2}$/"
+        ng-focus
         type="text"
         maxlength="10"
         placeholder="YYYY-MM-DD"
@@ -56,7 +59,7 @@
     </div>
 
     <div class="error"
-    ng-show="femaleEdit.dateOfBirth.$dirty && femaleEdit.dateOfBirth.$invalid">
+    ng-show="femaleEdit.dateOfBirth.$dirty && femaleEdit.dateOfBirth.$invalid && !femaleEdit.dateOfBirth.$focused">
         <small class="error"
         ng-show="femaleEdit.dateOfBirth.$error.required">
             Please enter a date of birth.
@@ -72,6 +75,7 @@
         ng-model="edit.zipCode"
         required
         ng-pattern="/(^\d{5}$)|(^\d{5}-\d{4}$)/"
+        ng-focus
         maxlength="5"
         type="text"
         placeholder="XXXXX"
@@ -79,7 +83,7 @@
     </div>
 
     <div class="error"
-    ng-show="femaleEdit.zipCode.$dirty && femaleEdit.zipCode.$invalid">
+    ng-show="femaleEdit.zipCode.$dirty && femaleEdit.zipCode.$invalid && !femaleEdit.zipCode.$focused">
         <small class="error"
         ng-show="femaleEdit.zipCode.$error.required">
             Please enter a zipcode.
@@ -94,12 +98,13 @@
         <textarea name="bio"
         ng-model="edit.bio"
         required
+        ng-focus
         placeholder="Bio"
         class="form-control"></textarea>
     </div>
 
     <div class="error"
-    ng-show="femaleEdit.bio.$dirty && femaleEdit.bio.$invalid">
+    ng-show="femaleEdit.bio.$dirty && femaleEdit.bio.$invalid && !femaleEdit.bio.$focused">
         <small class="error"
         ng-show="femaleEdit.bio.$error.required">
             Please enter a bio.
@@ -110,12 +115,13 @@
         <textarea name="fantasticBio"
         ng-model="edit.fantasticBio"
         required
+        ng-focus
         placeholder="Reason for being so fantastic"
         class="form-control"></textarea>
     </div>
 
     <div class="error"
-    ng-show="femaleEdit.fantasticBio.$dirty && femaleEdit.fantasticBio.$invalid">
+    ng-show="femaleEdit.fantasticBio.$dirty && femaleEdit.fantasticBio.$invalid && !femaleEdit.fantasticBio.$focused">
         <small class="error"
         ng-show="femaleEdit.fantasticBio.$error.required">
             Please enter a reason this female is considered fantastic.

@@ -4,7 +4,8 @@
         'ui.router',
         'ngResource',
         'femaleApp.services',
-        'femaleApp.controllers'
+        'femaleApp.controllers',
+        'femaleApp.directives'
     ])
 
     .config(function($httpProvider, $resourceProvider, $stateProvider, $locationProvider, $urlRouterProvider){

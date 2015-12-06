@@ -8,16 +8,33 @@
 
         var female = {};
 
+        var buildFemaleProperties = function(properties) {
+
+            var femaleProperties = {};
+
+            for(var key in properties) {
+                if (properties.hasOwnProperty(key)) {
+                    femaleProperties[key] = properties[key];
+                }
+            }
+            return femaleProperties;
+
+        };
+
+        var assignFemaleProperties = function(response) {
+            female.properties = buildFemaleProperties(response);
+        };
+
         female.getFemale = function(identifier) {
             return $http.get(host_name + 'females/get', {
                 params: {
                     identifier: identifier,
                 }
-            });
+            }).success(assignFemaleProperties);
         };
 
         female.getRandomFemale = function() {
-            return $http.get(host_name + 'females/get-random');
+            return $http.get(host_name + 'females/get-random').success(assignFemaleProperties);
         };
 
         female.getFemaleList = function() {

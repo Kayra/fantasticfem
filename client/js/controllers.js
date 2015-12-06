@@ -6,20 +6,11 @@
 
         var vm = this;
 
-        vm.injectRandomFemale = function(data) {
-            vm.firstName = data.firstName;
-            vm.lastName = data.lastName;
-            vm.dateOfBirth = data.dateOfBirth;
-            vm.zipCode = data.zipCode;
-            vm.bio = data.bio;
-            vm.fantasticBio = data.fantasticBio;
-            vm.id = data.id;
-        };
-
         vm.getRandomFemaleService = function() {
             FemaleService.getRandomFemale().then(function(response) {
-                console.log(response.data);
-                vm.injectRandomFemale(response.data);
+                vm.female = FemaleService.properties;
+            }, function() {
+                throw new Error('Something went wrong.');
             });
         };
 
@@ -48,20 +39,11 @@
 
         }
 
-        vm.injectRandomFemale = function(data) {
-            vm.firstName = data.firstName;
-            vm.lastName = data.lastName;
-            vm.dateOfBirth = data.dateOfBirth;
-            vm.zipCode = data.zipCode;
-            vm.bio = data.bio;
-            vm.fantasticBio = data.fantasticBio;
-            vm.id = data.id;
-        };
-
         vm.getFemaleService = function(id) {
             FemaleService.getFemale(id).then(function(response) {
-                console.log(response.data);
-                vm.injectRandomFemale(response.data);
+                vm.female = FemaleService.properties;
+            }, function() {
+                throw new Error('Something went wrong.');
             });
         };
 
@@ -144,20 +126,11 @@
 
         var vm = this;
 
-        vm.injectFemale = function(data) {
-            vm.firstName = data.firstName;
-            vm.lastName = data.lastName;
-            vm.dateOfBirth = data.dateOfBirth;
-            vm.zipCode = data.zipCode;
-            vm.bio = data.bio;
-            vm.fantasticBio = data.fantasticBio;
-            vm.id = data.id;
-        };
-
         vm.getFemaleService = function(id) {
             FemaleService.getFemale(id).then(function(response) {
-                console.log(response.data);
-                vm.injectFemale(response.data);
+                vm.female = FemaleService.properties;
+            }, function() {
+                throw new Error('Something went wrong.');
             });
         };
 

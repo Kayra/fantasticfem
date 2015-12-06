@@ -1,15 +1,15 @@
-<h1>{{detail.firstName}} {{detail.lastName}}</h1>
+<h1>{{detail.female.firstName}} {{detail.female.lastName}}</h1>
 
-<p>Born: {{detail.dateOfBirth}}</p>
+<p>Born: {{detail.female.dateOfBirth}}</p>
 
-<p>Zipcode: {{detail.zipCode}}</p>
+<p>Zipcode: {{detail.female.zipCode}}</p>
 
-<p>{{detail.bio}}</p>
+<p>{{detail.female.bio}}</p>
 
-<p>{{detail.fantasticBio}}</p>
+<p>{{detail.female.fantasticBio}}</p>
 
 <a href="/" class="btn btn-primary">Return to home</a>
 <br><br>
 <a href="/list" class="btn btn-primary">View all females</a>
 <br><br>
-<a href="/edit" class="btn btn-primary"  ng-click="detail.setId(detail.id)">Edit details for {{detail.firstName}} {{detail.lastName}}</a>
+<a href="/edit" class="btn btn-primary"  ng-click="detail.setId(detail.id)">Edit details for {{detail.female.firstName}} {{detail.female.lastName}}</a>

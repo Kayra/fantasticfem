@@ -6,7 +6,8 @@
         'ngMessages',
         'femaleApp.services',
         'femaleApp.controllers',
-        'femaleApp.directives'
+        'femaleApp.directives',
+        'femaleApp.utilities'
     ])
 
     .config(function($httpProvider, $resourceProvider, $stateProvider, $locationProvider, $urlRouterProvider){

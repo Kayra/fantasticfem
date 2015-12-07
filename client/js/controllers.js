@@ -9,13 +9,10 @@
         vm.getRandomFemaleService = function() {
             FemaleService.getRandomFemale().then(function(response) {
                 vm.female = FemaleService.properties;
+                SharedProperties.setProperty(vm.female.id);
             }, function() {
                 throw new Error('Something went wrong.');
             });
-        };
-
-        vm.setId = function(id) {
-            SharedProperties.setProperty(id);
         };
 
         vm.getRandomFemaleService();
@@ -23,32 +20,17 @@
     }])
 
 
-    .controller('FemaleDetailController', ['FemaleService', 'SharedProperties', '$location', function(FemaleService, SharedProperties, $location) {
+    .controller('FemaleDetailController', ['FemaleService', 'FemaleUtility', 'SharedProperties', '$location', function(FemaleService, FemaleUtility, SharedProperties, $location) {
 
         var vm = this;
 
-        vm.getFemaleName = function(url) {
-
-            var fullNameObject = {};
-
-            var fullNameArray = url.split('/')[2].split('_');
-            fullNameObject.firstName = fullNameArray[0];
-            fullNameObject.lastName = fullNameArray[1];
-
-            return fullNameObject;
-
-        }
-
-        vm.getFemaleService = function(id) {
-            FemaleService.getFemale(id).then(function(response) {
+        vm.getFemaleService = function(identifier) {
+            FemaleService.getFemale(identifier).then(function(response) {
                 vm.female = FemaleService.properties;
+                SharedProperties.setProperty(vm.female.id);
             }, function() {
                 throw new Error('Something went wrong.');
             });
-        };
-
-        vm.setId = function(id) {
-            SharedProperties.setProperty(id);
         };
 
         vm.getId = function() {
@@ -60,8 +42,7 @@
         if (id) {
             vm.getFemaleService(id);
         } else {
-            var fullNameArray = vm.getFemaleName($location.url());
-            var fullNameJson = angular.toJson(fullNameArray);
+            var fullNameJson = FemaleUtility.getFemaleNameJson($location.url());
             vm.getFemaleService(fullNameJson);
         }
 
@@ -146,10 +127,6 @@
             });
         };
 
-        vm.getId = function() {
-            return SharedProperties.getProperty();
-        };
-
         vm.submit = function() {
 
             var femaleObject = {};
@@ -179,7 +156,7 @@
 
         };
 
-        var id = vm.getId();
+        var id = SharedProperties.getProperty();
 
         if (id) {
             vm.getFemaleService(id);

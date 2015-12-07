@@ -33,11 +33,7 @@
             });
         };
 
-        vm.getId = function() {
-            return SharedProperties.getProperty();
-        };
-
-        var id = vm.getId();
+        var id = SharedProperties.getProperty();
 
         if (id) {
             vm.getFemaleService(id);
@@ -55,7 +51,6 @@
 
         vm.getFemaleListService = function() {
             FemaleService.getFemaleList().then(function(response) {
-                console.log(response.data);
                 vm.females = response.data;
             });
         };
@@ -73,12 +68,6 @@
 
         var vm = this;
 
-        vm.createFemaleService = function(femaleJsonObject) {
-            FemaleService.createFemale(femaleJsonObject).then(function(response){
-                console.log(response);
-            });
-        };
-
         vm.submit = function() {
 
             var femaleObject = {};
@@ -92,7 +81,7 @@
 
             var femaleJsonObject = angular.toJson(femaleObject);
 
-            vm.createFemaleService(femaleJsonObject);
+            FemaleService.createFemaleService(femaleJsonObject);
 
             var fullName = vm.firstName + "_" + vm.lastName;
 
@@ -115,18 +104,6 @@
             });
         };
 
-        vm.editFemaleService = function(femaleJsonObject) {
-            FemaleService.editFemale(femaleJsonObject).then(function(response) {
-                console.log(response);
-            });
-        };
-
-        vm.deleteFemaleService = function(id) {
-            FemaleService.deleteFemale(id).then(function(response) {
-                console.log(response);
-            });
-        };
-
         vm.submit = function() {
 
             var femaleObject = {};
@@ -141,7 +118,7 @@
 
             var femaleJsonObject = angular.toJson(femaleObject);
 
-            vm.editFemaleService(femaleJsonObject);
+            FemaleService.editFemaleService(femaleJsonObject);
 
             var fullName = vm.female.firstName + '_' + vm.female.lastName;
             $state.go('female_detail', {female: fullName});
@@ -150,7 +127,7 @@
 
         vm.delete = function() {
 
-            vm.deleteFemaleService(vm.id);
+            FemaleService.deleteFemaleService(vm.id);
 
             $state.go('female_display');
 

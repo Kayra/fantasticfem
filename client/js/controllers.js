@@ -131,19 +131,19 @@
 
             var femaleObject = {};
 
-            femaleObject.firstName = vm.firstName;
-            femaleObject.lastName = vm.lastName;
-            femaleObject.dateOfBirth = vm.dateOfBirth;
-            femaleObject.zipCode = vm.zipCode;
-            femaleObject.bio = vm.bio;
-            femaleObject.fantasticBio = vm.fantasticBio;
-            femaleObject.id = vm.id;
+            femaleObject.firstName = vm.female.firstName;
+            femaleObject.lastName = vm.female.lastName;
+            femaleObject.dateOfBirth = vm.female.dateOfBirth;
+            femaleObject.zipCode = vm.female.zipCode;
+            femaleObject.bio = vm.female.bio;
+            femaleObject.fantasticBio = vm.female.fantasticBio;
+            femaleObject.id = vm.female.id;
 
             var femaleJsonObject = angular.toJson(femaleObject);
 
             vm.editFemaleService(femaleJsonObject);
 
-            var fullName = vm.firstName + '_' + vm.lastName;
+            var fullName = vm.female.firstName + '_' + vm.female.lastName;
             $state.go('female_detail', {female: fullName});
 
         };

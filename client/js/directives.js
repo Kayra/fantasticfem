@@ -23,4 +23,17 @@
 
     }]);
 
+    femaleAppDirectives.directive('errorMessage', function() {
+        return {
+            restrict: 'E',
+            scope: {
+                data: '=message'
+            },
+            controller: function($scope) {
+                console.log($scope.data);
+                console.log('hit');
+            }
+        };
+    });
+
 })();

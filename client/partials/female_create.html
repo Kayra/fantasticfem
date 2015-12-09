@@ -2,7 +2,7 @@
 
     <div class="form-group">
         <input name="firstName"
-        ng-model="create.firstName"
+        ng-model="create.female.firstName"
         required
         ng-maxlength="255"
         ng-focus
@@ -20,7 +20,7 @@
 
     <div class="form-group">
         <input name="lastName"
-        ng-model="create.lastName"
+        ng-model="create.female.lastName"
         required
         ng-maxlength="255"
         ng-focus
@@ -38,7 +38,7 @@
 
     <div class="form-group">
         <input name="dateOfBirth"
-        ng-model="create.dateOfBirth"
+        ng-model="create.female.dateOfBirth"
         required
         ng-pattern="/^\d{4}[-]\d{2}[-]\d{2}$/"
         ng-focus
@@ -57,7 +57,7 @@
 
     <div class="form-group">
         <input name="zipCode"
-        ng-model="create.zipCode"
+        ng-model="create.female.zipCode"
         required
         ng-pattern="/(^\d{5}$)|(^\d{5}-\d{4}$)/"
         ng-focus
@@ -76,7 +76,7 @@
 
     <div class="form-group">
         <textarea name="bio"
-        ng-model="create.bio"
+        ng-model="create.female.bio"
         required
         ng-focus
         placeholder="Bio"
@@ -91,7 +91,7 @@
 
     <div class="form-group">
         <textarea name="fantasticBio"
-        ng-model="create.fantasticBio"
+        ng-model="create.female.fantasticBio"
         required
         ng-focus
         placeholder="Reason for being so fantastic"

@@ -66,7 +66,7 @@
     }])
 
 
-    .controller('FemaleCreateController', ['FemaleService', 'SharedProperties', '$state', function(FemaleService, SharedProperties, $state) {
+    .controller('FemaleCreateController', ['FemaleService', 'FemaleUtility', 'SharedProperties', '$state', function(FemaleService, FemaleUtility, SharedProperties, $state) {
 
         var vm = this;
 
@@ -81,16 +81,7 @@
 
         vm.submit = function() {
 
-            var femaleObject = {};
-
-            femaleObject.firstName = vm.firstName;
-            femaleObject.lastName = vm.lastName;
-            femaleObject.dateOfBirth = vm.dateOfBirth;
-            femaleObject.zipCode = vm.zipCode;
-            femaleObject.bio = vm.bio;
-            femaleObject.fantasticBio = vm.fantasticBio;
-
-            var femaleJsonObject = angular.toJson(femaleObject);
+            var femaleJsonObject = FemaleUtility.formToJsonObject(vm.female);
 
             vm.createFemaleService(femaleJsonObject).then(function() {
 
@@ -102,12 +93,12 @@
 
             });
 
-        }
+        };
 
     }])
 
 
-    .controller('FemaleEditController', ['FemaleService', 'SharedProperties', '$location', '$state', function(FemaleService, SharedProperties, $location, $state) {
+    .controller('FemaleEditController', ['FemaleService', 'FemaleUtility', 'SharedProperties', '$location', '$state', function(FemaleService, FemaleUtility, SharedProperties, $location, $state) {
 
         var vm = this;
 
@@ -136,17 +127,7 @@
 
         vm.submit = function() {
 
-            var femaleObject = {};
-
-            femaleObject.firstName = vm.female.firstName;
-            femaleObject.lastName = vm.female.lastName;
-            femaleObject.dateOfBirth = vm.female.dateOfBirth;
-            femaleObject.zipCode = vm.female.zipCode;
-            femaleObject.bio = vm.female.bio;
-            femaleObject.fantasticBio = vm.female.fantasticBio;
-            femaleObject.id = vm.female.id;
-
-            var femaleJsonObject = angular.toJson(femaleObject);
+            var femaleJsonObject = FemaleUtility.formToJsonObject(vm.female);
 
             vm.editFemaleService(femaleJsonObject).then(function() {
 
@@ -163,11 +144,9 @@
         vm.delete = function() {
 
             vm.deleteFemaleService(vm.female.id).then(function() {
-
                 if(!vm.errorType) {
                     $state.go('female_display');
                 }
-
             });
 
         };

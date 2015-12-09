@@ -66,9 +66,17 @@
     }])
 
 
-    .controller('FemaleCreateController', ['FemaleService', '$state', function(FemaleService, $state) {
+    .controller('FemaleCreateController', ['FemaleService', '$state', '$scope', function(FemaleService, $state, $scope) {
 
         var vm = this;
+
+        vm.createFemaleService = function(femaleJsonObject) {
+            return FemaleService.createFemale(femaleJsonObject).then(function() {
+                vm.errorType = '';
+            }, function() {
+                vm.errorType = 'server';
+            });
+        };
 
         vm.submit = function() {
 
@@ -83,11 +91,15 @@
 
             var femaleJsonObject = angular.toJson(femaleObject);
 
-            FemaleService.createFemaleService(femaleJsonObject);
+            vm.createFemaleService(femaleJsonObject).then(function() {
 
-            var fullName = vm.firstName + "_" + vm.lastName;
+                var fullName = vm.firstName + "_" + vm.lastName;
 
-            $state.go('female_detail', {female: fullName});
+                if (!vm.errorType) {
+                    $state.go('female_detail', {female: fullName});
+                }
+
+            });
 
         }
 

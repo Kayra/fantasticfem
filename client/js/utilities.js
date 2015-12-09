@@ -34,6 +34,10 @@
 
         }
 
+        utility.createFullName = function(firstName, lastName) {
+            return firstName + '_' + lastName;
+        }
+
         return utility;
 
     })

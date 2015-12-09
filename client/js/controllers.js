@@ -7,10 +7,12 @@
         var vm = this;
 
         vm.getRandomFemaleService = function() {
-            FemaleService.getRandomFemale().then(function(response) {
+            FemaleService.getRandomFemale()
+            .success(function(response) {
                 vm.female = FemaleService.femaleProperties;
                 SharedProperties.setProperty(vm.female.id);
-            }, function() {
+            })
+            .error(function() {
                 vm.errorType = 'server';
             });
         };
@@ -25,10 +27,12 @@
         var vm = this;
 
         vm.getFemaleService = function(identifier) {
-            FemaleService.getFemale(identifier).then(function(response) {
+            FemaleService.getFemale(identifier)
+            .success(function(response) {
                 vm.female = FemaleService.femaleProperties;
                 SharedProperties.setProperty(vm.female.id);
-            }, function() {
+            })
+            .error(function() {
                 vm.errorType = 'server';
             });
         };
@@ -50,9 +54,11 @@
         var vm = this;
 
         vm.getFemaleListService = function() {
-            FemaleService.getFemaleList().then(function(response) {
-                vm.females = response.data;
-            }, function() {
+            FemaleService.getFemaleList()
+            .success(function(response) {
+                vm.females = response;
+            })
+            .error(function() {
                 vm.errorType = 'server';
             });
         };
@@ -71,10 +77,12 @@
         var vm = this;
 
         vm.createFemaleService = function(femaleJsonObject) {
-            return FemaleService.createFemale(femaleJsonObject).then(function(response) {
-                SharedProperties.setProperty(response.data.id);
+            return FemaleService.createFemale(femaleJsonObject)
+            .success(function(response) {
+                SharedProperties.setProperty(response.id);
                 vm.errorType = '';
-            }, function() {
+            })
+            .error(function() {
                 vm.errorType = 'server';
             });
         };
@@ -83,9 +91,9 @@
 
             var femaleJsonObject = FemaleUtility.formToJsonObject(vm.female);
 
-            vm.createFemaleService(femaleJsonObject).then(function() {
+            vm.createFemaleService(femaleJsonObject).success(function() {
 
-                var fullName = vm.firstName + "_" + vm.lastName;
+                var fullName = vm.female.firstName + "_" + vm.female.lastName;
 
                 if (!vm.errorType) {
                     $state.go('female_detail', {female: fullName});
@@ -103,18 +111,22 @@
         var vm = this;
 
         vm.getFemaleService = function(id) {
-            FemaleService.getFemale(id).then(function(response) {
+            FemaleService.getFemale(id)
+            .success(function(response) {
                 vm.female = FemaleService.femaleProperties;
-            }, function() {
+            })
+            .error(function() {
                 vm.errorType = 'server';
             });
         };
 
         vm.editFemaleService = function(femaleJsonObject) {
-            return FemaleService.editFemale(femaleJsonObject).then(function(response) {
-                SharedProperties.setProperty(response.data.id);
+            return FemaleService.editFemale(femaleJsonObject)
+            .success(function(response) {
+                SharedProperties.setProperty(response.id);
                 vm.errorType = '';
-            }, function() {
+            })
+            .error(function() {
                 vm.errorType = 'server';
             });
         };
@@ -129,9 +141,9 @@
 
             var femaleJsonObject = FemaleUtility.formToJsonObject(vm.female);
 
-            vm.editFemaleService(femaleJsonObject).then(function() {
+            vm.editFemaleService(femaleJsonObject).success(function() {
 
-                var fullName = vm.firstName + "_" + vm.lastName;
+                var fullName = vm.female.firstName + "_" + vm.female.lastName;
 
                 if (!vm.errorType) {
                     $state.go('female_detail', {female: fullName});
@@ -143,7 +155,7 @@
 
         vm.delete = function() {
 
-            vm.deleteFemaleService(vm.female.id).then(function() {
+            vm.deleteFemaleService(vm.female.id).success(function() {
                 if(!vm.errorType) {
                     $state.go('female_display');
                 }

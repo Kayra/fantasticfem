@@ -52,6 +52,8 @@
         vm.getFemaleListService = function() {
             FemaleService.getFemaleList().then(function(response) {
                 vm.females = response.data;
+            }, function() {
+                vm.errorType = 'server';
             });
         };
 

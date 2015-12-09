@@ -22,7 +22,7 @@
         };
 
         var assignFemaleProperties = function(response) {
-            female.properties = buildFemaleProperties(response);
+            female.femaleProperties = buildFemaleProperties(response);
         };
 
         female.getFemale = function(identifier) {

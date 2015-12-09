@@ -8,7 +8,7 @@
 
         vm.getRandomFemaleService = function() {
             FemaleService.getRandomFemale().then(function(response) {
-                vm.female = FemaleService.properties;
+                vm.female = FemaleService.femaleProperties;
                 SharedProperties.setProperty(vm.female.id);
             }, function() {
                 vm.errorType = 'server';
@@ -26,7 +26,7 @@
 
         vm.getFemaleService = function(identifier) {
             FemaleService.getFemale(identifier).then(function(response) {
-                vm.female = FemaleService.properties;
+                vm.female = FemaleService.femaleProperties;
                 SharedProperties.setProperty(vm.female.id);
             }, function() {
                 vm.errorType = 'server';
@@ -66,12 +66,13 @@
     }])
 
 
-    .controller('FemaleCreateController', ['FemaleService', '$state', '$scope', function(FemaleService, $state, $scope) {
+    .controller('FemaleCreateController', ['FemaleService', 'SharedProperties', '$state', function(FemaleService, SharedProperties, $state) {
 
         var vm = this;
 
         vm.createFemaleService = function(femaleJsonObject) {
-            return FemaleService.createFemale(femaleJsonObject).then(function() {
+            return FemaleService.createFemale(femaleJsonObject).then(function(response) {
+                SharedProperties.setProperty(response.data.id);
                 vm.errorType = '';
             }, function() {
                 vm.errorType = 'server';
@@ -112,7 +113,7 @@
 
         vm.getFemaleService = function(id) {
             FemaleService.getFemale(id).then(function(response) {
-                vm.female = FemaleService.properties;
+                vm.female = FemaleService.femaleProperties;
             }, function() {
                 throw new Error('Something went wrong.');
             });

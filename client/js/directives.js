@@ -27,12 +27,17 @@
         return {
             restrict: 'E',
             scope: {
-                message: '=message'
+                errorType: '='
             },
-            template: "<p>{{message}}</p>",
             controller: function($scope) {
-                console.log($scope.message);
-            }
+                $scope.$watch('errorType', function(errorType){
+                    if (errorType == 'server') {
+                        $scope.message = "Sorry, the service is currently unavailable. Please try again later."
+                    }
+                });
+
+            },
+            template: "<p>{{message}}</p>"
         };
     });
 

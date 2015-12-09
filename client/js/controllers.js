@@ -11,7 +11,7 @@
                 vm.female = FemaleService.properties;
                 SharedProperties.setProperty(vm.female.id);
             }, function() {
-                vm.message = "Sorry, the service is currently unavailable. Please try again.";
+                vm.errorType = 'server';
             });
         };
 

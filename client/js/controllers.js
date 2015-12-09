@@ -115,9 +115,24 @@
             FemaleService.getFemale(id).then(function(response) {
                 vm.female = FemaleService.femaleProperties;
             }, function() {
-                throw new Error('Something went wrong.');
+                vm.errorType = 'server';
             });
         };
+
+        vm.editFemaleService = function(femaleJsonObject) {
+            return FemaleService.editFemale(femaleJsonObject).then(function(response) {
+                SharedProperties.setProperty(response.data.id);
+                vm.errorType = '';
+            }, function() {
+                vm.errorType = 'server';
+            });
+        };
+
+        vm.deleteFemaleService = function(id) {
+            return FemaleService.deleteFemale(id).error(function() {
+                vm.errorType = 'server';
+            })
+        }
 
         vm.submit = function() {
 
@@ -133,18 +148,27 @@
 
             var femaleJsonObject = angular.toJson(femaleObject);
 
-            FemaleService.editFemaleService(femaleJsonObject);
+            vm.editFemaleService(femaleJsonObject).then(function() {
 
-            var fullName = vm.female.firstName + '_' + vm.female.lastName;
-            $state.go('female_detail', {female: fullName});
+                var fullName = vm.firstName + "_" + vm.lastName;
+
+                if (!vm.errorType) {
+                    $state.go('female_detail', {female: fullName});
+                }
+
+            });
 
         };
 
         vm.delete = function() {
 
-            FemaleService.deleteFemaleService(vm.id);
+            vm.deleteFemaleService(vm.female.id).then(function() {
 
-            $state.go('female_display');
+                if(!vm.errorType) {
+                    $state.go('female_display');
+                }
+
+            });
 
         };
 

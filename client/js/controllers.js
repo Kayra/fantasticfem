@@ -22,7 +22,7 @@
     }])
 
 
-    .controller('FemaleDetailController', ['FemaleService', 'FemaleUtility', 'SharedProperties', '$location', function(FemaleService, FemaleUtility, SharedProperties, $location) {
+    .controller('FemaleDetailController', ['FemaleService', 'SharedProperties', '$location', '$state', function(FemaleService, SharedProperties, $location, $state) {
 
         var vm = this;
 
@@ -42,8 +42,7 @@
         if (id) {
             vm.getFemaleService(id);
         } else {
-            var fullNameJson = FemaleUtility.getFemaleNameJson($location.url());
-            vm.getFemaleService(fullNameJson);
+            $state.go('female_display');
         }
 
     }])
@@ -136,6 +135,10 @@
                 vm.errorType = 'server';
             })
         }
+
+        vm.setId = function(id) {
+            SharedProperties.setProperty(id);
+        };
 
         vm.submit = function() {
 

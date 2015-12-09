@@ -29,7 +29,7 @@
                 controller: 'FemaleDisplayController as display'
             })
             .state('female_detail', {
-                url: '/detail/:female',
+                url: '/detail',
                 templateUrl: '/partials/female_detail.html',
                 controller: 'FemaleDetailController as detail'
             })

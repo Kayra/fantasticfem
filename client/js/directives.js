@@ -27,11 +27,11 @@
         return {
             restrict: 'E',
             scope: {
-                data: '=message'
+                message: '=message'
             },
+            template: "<p>{{message}}</p>",
             controller: function($scope) {
-                console.log($scope.data);
-                console.log('hit');
+                console.log($scope.message);
             }
         };
     });

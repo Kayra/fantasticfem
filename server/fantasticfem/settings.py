@@ -15,11 +15,12 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ayw^uapzk-@sy%@ongxyjf!*&e0+y(bvgkjfjq_d7cyyb7!*oi'
+SECRET_KEY = '9ajo@n^rw&%rbv*w^)rf6yx7#l+xmkrt(h73nt&@562$&*+r3q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,7 +40,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'corsheaders',
     'localflavor',
-    'fantasticfem.females',
+    'females',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -54,7 +55,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'fantasticfem.config.urls'
+ROOT_URLCONF = 'fantasticfem.urls'
 
 TEMPLATES = [
     {
@@ -72,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'fantasticfem.config.wsgi.application'
+WSGI_APPLICATION = 'fantasticfem.wsgi.application'
 
 
 # Database
@@ -107,7 +108,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/fantasticfem/static/'
+STATIC_URL = '/static/'
 
 
 # Rest framework settings

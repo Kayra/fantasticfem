@@ -31,7 +31,7 @@ class FemaleAPITests(TestCase):
 
         url = reverse('females:get_female')
         response = self.client.get(url, {'identifier': testIdentifier})
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, 200)  # Make sure a success response is recieved
 
         data = json.loads(response.content.decode())
         self.assertEquals(len(data), 7)  # Make sure all fields are present
@@ -39,20 +39,33 @@ class FemaleAPITests(TestCase):
         self.assertEquals(testIdentifier, data['id'])  # Make sure the correct female was returned
 
     def test_getRandomFemale(self):
+
         """
             A female is returned
         """
+
         url = reverse('females:get_random_female')
         response = self.client.get(url)
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, 200)  # Make sure a success response is recieved
+
         data = json.loads(response.content.decode())
-        self.assertEquals(len(data), 7)
+        self.assertEquals(len(data), 7)  # Make sure all fields are present
 
     def test_getRandomFemaleIsRandom(self):
+
         """
             When making multiple requests, the female returned should not be the same every time.
         """
-        pass
+
+        females = []
+        url = reverse('females:get_random_female')
+
+        for i in range(0, 5):
+            response = self.client.get(url)
+            data = json.loads(response.content.decode())
+            females.append(data['id'])
+
+        self.assertTrue(len(set(females)) > 1)  # Make sure the same female isn't being returned every time
 
     def test_getFemaleList(self):
         pass

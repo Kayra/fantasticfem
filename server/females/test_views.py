@@ -91,7 +91,26 @@ class FemaleAPITests(TestCase):
         self.assertEquals(femaleIds, responseIds)  # Make sure females from API match actual females
 
     def test_createFemale(self):
-        pass
+
+        """
+            Female created with the API should be in the database
+        """
+
+        femaleToCreate = {}
+        femaleToCreate['firstName'] = "Test"
+        femaleToCreate['lastName'] = "Female"
+        femaleToCreate['dateOfBirth'] = "1990-01-01"
+        femaleToCreate['zipCode'] = "11111"
+        femaleToCreate['bio'] = "Test bio"
+        femaleToCreate['fantasticBio'] = "Fantastic test bio"
+
+        url = reverse('females:create_female')
+        response = self.client.post(url, femaleToCreate)
+        self.assertEquals(response.status_code, 200)  # Make sure a success response is recieved
+
+        femaleFromDb = Female.objects.get(pk=response.data['id'])
+        self.assertEquals(femaleFromDb.firstName, response.data['firstName'])  # Make sure the female sent to the API is the same as that in the db
+        self.assertEquals(femaleFromDb.lastName, response.data['lastName'])  # Make sure the female sent to the API is the same as that in the db
 
     def test_editFemale(self):
         pass

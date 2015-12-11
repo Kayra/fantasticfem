@@ -3,7 +3,10 @@ import json
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
+from rest_framework.renderers import JSONRenderer
+
 from .models import Female
+from .serializers import FemaleSerializer
 
 
 def createFemale(firstName, lastName, dateOfBirth, zipCode):
@@ -113,7 +116,24 @@ class FemaleAPITests(TestCase):
         self.assertEquals(femaleFromDb.lastName, response.data['lastName'])  # Make sure the female sent to the API is the same as that in the db
 
     def test_editFemale(self):
-        pass
+
+        """
+            Female edited with the API should persist those edits in the db
+        """
+
+        femaleToEdit = Female.objects.all()[:1].get()
+        editedBio = "This is now an edited bio"
+        femaleToEdit.bio = editedBio
+
+        femaleToEditSerialized = FemaleSerializer(femaleToEdit)
+        femaleToEditJson = JSONRenderer().render(femaleToEditSerialized.data)
+
+        url = reverse('females:edit_female')
+        response = self.client.put(url, femaleToEditJson, content_type='application/json')
+        self.assertEquals(response.status_code, 200)  # Make sure a success response is recieved
+
+        femaleFromDb = Female.objects.get(pk=response.data['id'])
+        self.assertEquals(femaleFromDb.bio, editedBio)  # Make sure the female in the DB has the same bio as the bio we passed to the API
 
     def test_deleteFemale(self):
         pass

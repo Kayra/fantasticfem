@@ -68,7 +68,27 @@ class FemaleAPITests(TestCase):
         self.assertTrue(len(set(females)) > 1)  # Make sure the same female isn't being returned every time
 
     def test_getFemaleList(self):
-        pass
+
+        """
+            List of all females should be returned
+        """
+
+        females = Female.objects.all().order_by('lastName')
+        femaleIds = []
+        for female in females:
+            femaleIds.append(female.id)
+
+        url = reverse('females:get_female_list')
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)  # Make sure a success response is recieved
+
+        data = json.loads(response.content.decode())
+
+        responseIds = []
+        for female in data:
+            responseIds.append(female['id'])
+
+        self.assertEquals(femaleIds, responseIds)  # Make sure females from API match actual females
 
     def test_createFemale(self):
         pass

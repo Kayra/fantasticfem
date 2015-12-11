@@ -12,12 +12,16 @@ from .serializers import FemaleSerializer
 @api_view(['GET'])
 def getRandomFemale(request):
 
-    last = Female.objects.count() - 1
-    randomIndex = random.randint(0, last)
-    randomFemale = Female.objects.all()[randomIndex]
+    try:
+        last = Female.objects.count() - 1
+        randomIndex = random.randint(0, last)
+        randomFemale = Female.objects.all()[randomIndex]
 
-    serializedFemale = FemaleSerializer(randomFemale)
-    return Response(serializedFemale.data)
+        serializedFemale = FemaleSerializer(randomFemale)
+        return Response(serializedFemale.data)
+
+    except ValueError:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 @api_view(['GET'])
@@ -25,6 +29,7 @@ def getFemale(request):
 
     identifier = request.GET.get("identifier", None)
 
+    # If the identifier is an id number
     try:
         float(identifier)
         try:
@@ -32,12 +37,17 @@ def getFemale(request):
         except Female.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+    # If the identifier is a full name
     except ValueError:
         fullName = json.loads(identifier)
         try:
             female = Female.objects.get(firstName=fullName['firstName'], lastName=fullName['lastName'])
         except Female.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+    # If there is no identifier
+    except TypeError:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
     serializedFemale = FemaleSerializer(female)
     return Response(serializedFemale.data)

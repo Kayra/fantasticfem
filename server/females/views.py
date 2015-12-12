@@ -1,5 +1,3 @@
-import random
-
 from django.utils.datastructures import MultiValueDictKeyError
 
 from rest_framework import status
@@ -8,15 +6,14 @@ from rest_framework.response import Response
 
 from .models import Female
 from .serializers import FemaleSerializer
+from . import utility
 
 
 @api_view(['GET'])
 def getRandomFemale(request):
 
     try:
-        last = Female.objects.count() - 1
-        randomIndex = random.randint(0, last)
-        randomFemale = Female.objects.all()[randomIndex]
+        randomFemale = utility.getRandomFemale()
 
     except ValueError:
         return Response(status=status.HTTP_404_NOT_FOUND)

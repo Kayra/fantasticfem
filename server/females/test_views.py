@@ -127,6 +127,7 @@ class FemaleAPITests(TestCase):
 
         femaleToEditSerialized = FemaleSerializer(femaleToEdit)
         femaleToEditJson = JSONRenderer().render(femaleToEditSerialized.data)
+
         url = reverse('females:edit_female')
         response = self.client.put(url, femaleToEditJson, content_type='application/json')
         self.assertEquals(response.status_code, 200)  # Make sure a success response is recieved

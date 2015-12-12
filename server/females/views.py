@@ -29,30 +29,18 @@ def getRandomFemale(request):
 @api_view(['GET'])
 def getFemale(request):
 
-    identifier = request.GET.get("identifier", None)
+    identifier = request.query_params['identifier']
 
-    # If the identifier is an id number
     try:
-        float(identifier)
-        try:
-            female = Female.objects.get(pk=identifier)
-        except Female.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+        female = Female.objects.get(pk=identifier)
+        serializedFemale = FemaleSerializer(female)
+        return Response(serializedFemale.data)
 
-    # If the identifier is a full name
-    except ValueError:
-        fullName = json.loads(identifier)
-        try:
-            female = Female.objects.get(firstName=fullName['firstName'], lastName=fullName['lastName'])
-        except Female.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-
-    # If there is no identifier
-    except TypeError:
+    except Female.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    serializedFemale = FemaleSerializer(female)
-    return Response(serializedFemale.data)
+    except TypeError:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 @api_view(['GET'])
@@ -61,7 +49,6 @@ def getFemaleList(request):
     try:
         females = Female.objects.all().order_by('lastName')
         serializedFemales = FemaleSerializer(females, many=True)
-
         return Response(serializedFemales.data)
 
     except Female.DoesNotExist:

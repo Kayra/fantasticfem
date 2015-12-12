@@ -33,8 +33,15 @@ class FemaleAPITests(TestCase):
         testIdentifier = testFemale.id
 
         url = reverse('females:get_female')
+
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 400)  # Make sure no params return error response
+
+        response = self.client.get(url, {'wrong': 'wrong'}, content_type='application/json')
+        self.assertEquals(response.status_code, 400)  # Make sure bad params return error response
+
         response = self.client.get(url, {'identifier': testIdentifier})
-        self.assertEquals(response.status_code, 200)  # Make sure a success response is recieved
+        self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
         data = json.loads(response.content.decode())
         self.assertEquals(len(data), 7)  # Make sure all fields are present
@@ -48,8 +55,12 @@ class FemaleAPITests(TestCase):
         """
 
         url = reverse('females:get_random_female')
+
+        response = self.client.get(url, {'wrong': 'wrong'}, content_type='application/json')
+        self.assertEquals(response.status_code, 200)  # Make sure parameters are ignored
+
         response = self.client.get(url)
-        self.assertEquals(response.status_code, 200)  # Make sure a success response is recieved
+        self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
         data = json.loads(response.content.decode())
         self.assertEquals(len(data), 7)  # Make sure all fields are present
@@ -82,8 +93,12 @@ class FemaleAPITests(TestCase):
             femaleIds.append(female.id)
 
         url = reverse('females:get_female_list')
+
+        response = self.client.get(url, {'wrong': 'wrong'}, content_type='application/json')
+        self.assertEquals(response.status_code, 200)  # Make sure parameters are ignored
+
         response = self.client.get(url)
-        self.assertEquals(response.status_code, 200)  # Make sure a success response is recieved
+        self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
         data = json.loads(response.content.decode())
 
@@ -108,8 +123,15 @@ class FemaleAPITests(TestCase):
         femaleToCreate['fantasticBio'] = "Fantastic test bio"
 
         url = reverse('females:create_female')
+
+        response = self.client.post(url)
+        self.assertEquals(response.status_code, 400)  # Make sure no params return error response
+
+        response = self.client.post(url, {'wrong': 'wrong'}, content_type='application/json')
+        self.assertEquals(response.status_code, 400)  # Make sure bad params return error response
+
         response = self.client.post(url, femaleToCreate)
-        self.assertEquals(response.status_code, 200)  # Make sure a success response is recieved
+        self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
         femaleFromDb = Female.objects.get(pk=response.data['id'])
         self.assertEquals(femaleFromDb.firstName, response.data['firstName'])  # Make sure the female sent to the API is the same as that in the db
@@ -129,8 +151,15 @@ class FemaleAPITests(TestCase):
         femaleToEditJson = JSONRenderer().render(femaleToEditSerialized.data)
 
         url = reverse('females:edit_female')
+
+        response = self.client.put(url)
+        self.assertEquals(response.status_code, 400)  # Make sure no params return error response
+
+        response = self.client.put(url, {'wrong': 'wrong'}, content_type='application/json')
+        self.assertEquals(response.status_code, 400, )  # Make sure bad params return error response
+
         response = self.client.put(url, femaleToEditJson, content_type='application/json')
-        self.assertEquals(response.status_code, 200)  # Make sure a success response is recieved
+        self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
         femaleFromDb = Female.objects.get(pk=response.data['id'])
         self.assertEquals(femaleFromDb.bio, editedBio)  # Make sure the female in the DB has the same bio as the bio we passed to the API
@@ -146,8 +175,12 @@ class FemaleAPITests(TestCase):
         femaleToDeleteJson = json.dumps(femaleToDeleteId)
 
         url = reverse('females:delete_female')
+
+        response = self.client.delete(url, {'wrong': 'wrong'}, content_type='application/json')
+        self.assertEquals(response.status_code, 400, )  # Make sure bad params return error response
+
         response = self.client.delete(url, femaleToDeleteJson, content_type='application/json')
-        self.assertEquals(response.status_code, 204)  # Make sure a success response is recieved
+        self.assertEquals(response.status_code, 204)  # Make sure valid request returns success response
 
         with self.assertRaises(Female.DoesNotExist):
             Female.objects.get(pk=femaleToDelete.id)  # Make sure the female no longer exists in the DB

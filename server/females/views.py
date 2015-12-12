@@ -14,7 +14,6 @@ def getRandomFemale(request):
 
     try:
         randomFemale = utility.getRandomFemale()
-
     except ValueError:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -25,14 +24,15 @@ def getRandomFemale(request):
 @api_view(['GET'])
 def getFemale(request):
 
-    identifier = request.query_params['identifier']
+    try:
+        identifier = request.query_params['identifier']
+    except MultiValueDictKeyError:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
     try:
         female = Female.objects.get(pk=identifier)
-
     except Female.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-
     except TypeError:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -45,7 +45,6 @@ def getFemaleList(request):
 
     try:
         females = Female.objects.all().order_by('lastName')
-
     except Female.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -61,7 +60,6 @@ def createFemale(request):
     if serializedFemale.is_valid():
         serializedFemale.save()
         return Response(serializedFemale.data)
-
     else:
         return Response(serializedFemale.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -73,13 +71,14 @@ def editFemale(request):
         female = Female.objects.get(pk=request.data['id'])
     except Female.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
+    except MultiValueDictKeyError:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
     serializedFemale = FemaleSerializer(female, data=request.data)
 
     if serializedFemale.is_valid():
         serializedFemale.save()
         return Response(serializedFemale.data)
-
     else:
         return Response(serializedFemale.errors, status=status.HTTP_400_BAD_REQUEST)
 

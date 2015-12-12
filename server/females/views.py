@@ -1,5 +1,4 @@
 import random
-import json
 
 from django.utils.datastructures import MultiValueDictKeyError
 
@@ -19,11 +18,11 @@ def getRandomFemale(request):
         randomIndex = random.randint(0, last)
         randomFemale = Female.objects.all()[randomIndex]
 
-        serializedFemale = FemaleSerializer(randomFemale)
-        return Response(serializedFemale.data)
-
     except ValueError:
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+    serializedFemale = FemaleSerializer(randomFemale)
+    return Response(serializedFemale.data)
 
 
 @api_view(['GET'])
@@ -33,8 +32,6 @@ def getFemale(request):
 
     try:
         female = Female.objects.get(pk=identifier)
-        serializedFemale = FemaleSerializer(female)
-        return Response(serializedFemale.data)
 
     except Female.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
@@ -42,17 +39,21 @@ def getFemale(request):
     except TypeError:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
+    serializedFemale = FemaleSerializer(female)
+    return Response(serializedFemale.data)
+
 
 @api_view(['GET'])
 def getFemaleList(request):
 
     try:
         females = Female.objects.all().order_by('lastName')
-        serializedFemales = FemaleSerializer(females, many=True)
-        return Response(serializedFemales.data)
 
     except Female.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+    serializedFemales = FemaleSerializer(females, many=True)
+    return Response(serializedFemales.data)
 
 
 @api_view(['POST'])
@@ -64,7 +65,8 @@ def createFemale(request):
         serializedFemale.save()
         return Response(serializedFemale.data)
 
-    return Response(serializedFemale.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response(serializedFemale.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['PUT'])
@@ -81,7 +83,8 @@ def editFemale(request):
         serializedFemale.save()
         return Response(serializedFemale.data)
 
-    return Response(serializedFemale.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response(serializedFemale.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['DELETE'])
@@ -95,8 +98,8 @@ def deleteFemale(request):
 
     try:
         female = Female.objects.get(pk=identifier)
-        female.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
     except Female.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+    female.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)

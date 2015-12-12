@@ -26,7 +26,7 @@ class FemaleAPITests(TestCase):
     def test_getFemale(self):
 
         """
-            A female is returned when a correct Id is passed as a parameter
+            A female should be returned when a correct id is passed as a parameter
         """
 
         testFemale = Female.objects.all()[:1].get()
@@ -44,7 +44,7 @@ class FemaleAPITests(TestCase):
     def test_getRandomFemale(self):
 
         """
-            A female is returned
+            A female should be returned
         """
 
         url = reverse('females:get_random_female')
@@ -63,7 +63,7 @@ class FemaleAPITests(TestCase):
         females = []
         url = reverse('females:get_random_female')
 
-        for i in range(0, 5):
+        for i in range(0, 10):
             response = self.client.get(url)
             data = json.loads(response.content.decode())
             females.append(data['id'])
@@ -127,7 +127,6 @@ class FemaleAPITests(TestCase):
 
         femaleToEditSerialized = FemaleSerializer(femaleToEdit)
         femaleToEditJson = JSONRenderer().render(femaleToEditSerialized.data)
-
         url = reverse('females:edit_female')
         response = self.client.put(url, femaleToEditJson, content_type='application/json')
         self.assertEquals(response.status_code, 200)  # Make sure a success response is recieved
@@ -136,4 +135,18 @@ class FemaleAPITests(TestCase):
         self.assertEquals(femaleFromDb.bio, editedBio)  # Make sure the female in the DB has the same bio as the bio we passed to the API
 
     def test_deleteFemale(self):
-        pass
+
+        """
+            Female that has been deleted should not be in the db
+        """
+
+        femaleToDelete = Female.objects.all()[:1].get()
+        femaleToDeleteId = {'id': femaleToDelete.id}
+        femaleToDeleteJson = json.dumps(femaleToDeleteId)
+
+        url = reverse('females:delete_female')
+        response = self.client.delete(url, femaleToDeleteJson, content_type='application/json')
+        self.assertEquals(response.status_code, 204)  # Make sure a success response is recieved
+
+        with self.assertRaises(Female.DoesNotExist):
+            Female.objects.get(pk=femaleToDelete.id)  # Make sure the female no longer exists in the DB

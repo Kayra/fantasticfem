@@ -1,6 +1,8 @@
 import random
 import json
 
+from django.utils.datastructures import MultiValueDictKeyError
+
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -98,13 +100,16 @@ def editFemale(request):
 @api_view(['DELETE'])
 def deleteFemale(request):
 
-    identifier = request.GET.get("id", None)
+    #  Handle both query params and data to satisfy the lack of query params in test client
+    try:
+        identifier = request.query_params['id']
+    except MultiValueDictKeyError:
+        identifier = request.data['id']
 
     try:
         female = Female.objects.get(pk=identifier)
+        female.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
     except Female.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-
-    female.delete()
-
-    return Response(status=status.HTTP_204_NO_CONTENT)

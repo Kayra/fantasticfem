@@ -37,44 +37,6 @@
     </div>
 
     <div class="form-group">
-        <input name="dateOfBirth"
-        ng-model="create.female.dateOfBirth"
-        required
-        ng-pattern="/^\d{4}[-]\d{2}[-]\d{2}$/"
-        ng-focus
-        type="text"
-        maxlength="10"
-        placeholder="YYYY-MM-DD"
-        class="form-control">
-    </div>
-
-    <div class="error"
-    ng-show="femaleCreate.dateOfBirth.$dirty && femaleCreate.dateOfBirth.$invalid && !femaleCreate.dateOfBirth.$focused"
-    ng-messages="femaleCreate.dateOfBirth.$error">
-        <p ng-message="required">Please enter a date of birth.</p>
-        <p ng-message="pattern">Please enter the date in the format YYYY-MM-DD</p>
-    </div>
-
-    <div class="form-group">
-        <input name="zipCode"
-        ng-model="create.female.zipCode"
-        required
-        ng-pattern="/(^\d{5}$)|(^\d{5}-\d{4}$)/"
-        ng-focus
-        maxlength="5"
-        type="text"
-        placeholder="XXXXX"
-        class="form-control">
-    </div>
-
-    <div class="error"
-    ng-show="femaleCreate.zipCode.$dirty && femaleCreate.zipCode.$invalid && !femaleCreate.zipCode.$focused"
-    ng-messages="femaleCreate.zipCode.$error">
-        <p ng-message="required">Please enter a zipcode</p>
-        <p ng-message="pattern">Please enter the date in the US format of XXXXX</p>
-    </div>
-
-    <div class="form-group">
         <textarea name="bio"
         ng-model="create.female.bio"
         required

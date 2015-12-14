@@ -13,11 +13,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Female',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', auto_created=True, serialize=False)),
                 ('firstName', models.CharField(max_length=255)),
                 ('lastName', models.CharField(max_length=255)),
-                ('dateOfBirth', models.DateField()),
-                ('zipCode', models.CharField(max_length=255)),
                 ('bio', models.TextField()),
                 ('fantasticBio', models.TextField()),
             ],

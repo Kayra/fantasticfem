@@ -15,6 +15,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+BASE_URL = 'http://127.0.0.1:8000/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -109,6 +110,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 MEDIA_ROOT = 'media/'
+LOCAL_MEDIA_URL = 'media/'
+MEDIA_URL = BASE_URL + LOCAL_MEDIA_URL
+
 
 # Rest framework settings
 
@@ -117,7 +121,8 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny'
-    ]
+    ],
+    'PREPEND_MEDIA_URL': True
 }
 
 

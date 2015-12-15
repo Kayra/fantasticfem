@@ -29,6 +29,15 @@
         class="form-control">
     </div>
 
+    <img src="{{edit.female.profileImage}}">
+
+    <div class="form-group">
+        <input name="profileImage"
+        file-model="edit.female.profileImage"
+        type="file"
+        class="form-control">
+    </div>
+
     <div class="error"
     ng-show="femaleEdit.lastName.$dirty && femaleEdit.lastName.$invalid && !femaleEdit.lastName.$focused"
     ng-messages="femaleEdit.lastName.$error">

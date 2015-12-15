@@ -49,7 +49,10 @@
         };
 
         female.editFemale = function(femaleJsonObject) {
-            return $http.put(host_name + 'females/edit', femaleJsonObject);
+            return $http.put(host_name + 'females/edit', femaleJsonObject, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            });
         };
 
         female.deleteFemale = function(id) {

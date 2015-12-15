@@ -88,9 +88,9 @@
 
         vm.submit = function() {
 
-            var femaleJsonObject = FemaleUtility.formToFormData(vm.female);
+            var femaleFormData = FemaleUtility.formToFormData(vm.female);
 
-            vm.createFemaleService(femaleJsonObject).success(function() {
+            vm.createFemaleService(femaleFormData).success(function() {
                 if (!vm.errorType) {
                     $state.go('female_detail');
                 }
@@ -115,8 +115,8 @@
             });
         };
 
-        vm.editFemaleService = function(femaleJsonObject) {
-            return FemaleService.editFemale(femaleJsonObject)
+        vm.editFemaleService = function(femaleFormData) {
+            return FemaleService.editFemale(femaleFormData)
             .success(function(response) {
                 SharedProperties.setProperty(response.id);
                 vm.errorType = '';
@@ -138,9 +138,9 @@
 
         vm.submit = function() {
 
-            var femaleJsonObject = FemaleUtility.formToJsonObject(vm.female);
+            var femaleFormData = FemaleUtility.formToFormData(vm.female);
 
-            vm.editFemaleService(femaleJsonObject).success(function() {
+            vm.editFemaleService(femaleFormData).success(function() {
 
                 if (!vm.errorType) {
                     $state.go('female_detail');

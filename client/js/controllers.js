@@ -142,10 +142,8 @@
 
             vm.editFemaleService(femaleJsonObject).success(function() {
 
-                var fullName = FemaleUtility.createFullName(vm.firstName, vm.lastName);
-
                 if (!vm.errorType) {
-                    $state.go('female_detail', {female: fullName});
+                    $state.go('female_detail');
                 }
 
             });

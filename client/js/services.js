@@ -41,8 +41,11 @@
             return $http.get(host_name + 'females/list');
         };
 
-        female.createFemale = function(femaleJsonObject) {
-            return $http.post(host_name + 'females/create', femaleJsonObject);
+        female.createFemale = function(femaleObject) {
+            return $http.post(host_name + 'females/create', femaleObject, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            });
         };
 
         female.editFemale = function(femaleJsonObject) {

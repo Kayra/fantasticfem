@@ -29,13 +29,14 @@
         class="form-control">
     </div>
 
-    <img src="{{edit.female.profileImage}}">
+    <img ng-if="edit.female.profileImage" ng-src="{{edit.female.previewImage}}">
 
     <div class="form-group">
         <input name="profileImage"
         file-model="edit.female.profileImage"
         type="file"
-        class="form-control">
+        class="form-control"
+        image-preview="edit.female.previewImage">
     </div>
 
     <div class="error"

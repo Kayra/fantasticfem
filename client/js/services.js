@@ -17,6 +17,9 @@
                     femaleProperties[key] = properties[key];
                 }
             }
+
+            femaleProperties.previewImage = properties.profileImage;
+
             return femaleProperties;
 
         };
@@ -48,8 +51,9 @@
             });
         };
 
-        female.editFemale = function(femaleJsonObject) {
-            return $http.put(host_name + 'females/edit', femaleJsonObject, {
+        female.editFemale = function(femaleObject) {
+            console.log(femaleObject);
+            return $http.put(host_name + 'females/edit', femaleObject, {
                 transformRequest: angular.identity,
                 headers: { 'Content-Type': undefined }
             });

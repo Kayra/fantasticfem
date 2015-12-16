@@ -36,11 +36,14 @@
         <p ng-message="maxlength">The maximum allowed length for the last name is 255 characters.</p>
     </div>
 
+    <img ng-if="create.female.profileImage" ng-src="{{create.female.previewImage}}">
+
     <div class="form-group">
         <input name="profileImage"
         file-model="create.female.profileImage"
         type="file"
-        class="form-control">
+        class="form-control"
+        image-preview="create.female.previewImage">
     </div>
 
     <div class="form-group">

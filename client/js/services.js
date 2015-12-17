@@ -52,7 +52,6 @@
         };
 
         female.editFemale = function(femaleObject) {
-            console.log(femaleObject);
             return $http.put(host_name + 'females/edit', femaleObject, {
                 transformRequest: angular.identity,
                 headers: { 'Content-Type': undefined }

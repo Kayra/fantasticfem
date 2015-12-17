@@ -61,6 +61,13 @@ def createFemale(request):
         serializedFemale.save()
         return Response(serializedFemale.data)
     else:
+        print('data hitting the server', request.data)
+        try:
+            print('type hitting the server', type(request.data['profileImage']))
+        except AttributeError:
+            pass
+        except MultiValueDictKeyError:
+            pass
         return Response(serializedFemale.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

@@ -1,5 +1,10 @@
 import json
+from io import BytesIO
+import base64
 
+from PIL import Image
+
+from django.core.files.images import ImageFile
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
@@ -9,19 +14,35 @@ from .models import Female
 from .serializers import FemaleSerializer
 
 
-def createFemale(firstName, lastName, dateOfBirth, zipCode):
+def createFemale(firstName, lastName, dateOfBirth):
+
     """
         Convinience function to create a test female
     """
-    Female.objects.create(firstName=firstName, lastName=lastName, dateOfBirth=dateOfBirth, zipCode=zipCode, bio='bio example', fantasticBio='fantastic bio example')
+
+    Female.objects.create(firstName=firstName, lastName=lastName, profileImage=createImageFile(), bio='bio example', fantasticBio='fantastic bio example')
+
+
+def createImageFile():
+
+    """
+        Convinience function to create a test image
+    """
+
+    image = Image.new('RGBA', size=(50, 50), color=(256, 0, 0))
+    image_file = BytesIO()
+    image.save(image_file, 'PNG')
+    img_str = base64.b64encode(image_file.getvalue())
+
+    return ImageFile(img_str)
 
 
 class FemaleAPITests(TestCase):
 
     def setUp(self):
-        createFemale('Ada', 'Lovelace', '1990-01-01', '11111')
-        createFemale('Barbara', 'Liskov', '1990-02-02', '22222')
-        createFemale('Murasaki', 'Shikibu', '1990-02-02', '33333')
+        createFemale('Ada', 'Lovelace', '11111')
+        createFemale('Barbara', 'Liskov', '22222')
+        createFemale('Murasaki', 'Shikibu', '33333')
 
     def test_getFemale(self):
 
@@ -44,7 +65,7 @@ class FemaleAPITests(TestCase):
         self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
         data = json.loads(response.content.decode())
-        self.assertEquals(len(data), 7)  # Make sure all fields are present
+        self.assertEquals(len(data), 6)  # Make sure all fields are present
 
         self.assertEquals(testIdentifier, data['id'])  # Make sure the correct female was returned
 
@@ -63,7 +84,7 @@ class FemaleAPITests(TestCase):
         self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
         data = json.loads(response.content.decode())
-        self.assertEquals(len(data), 7)  # Make sure all fields are present
+        self.assertEquals(len(data), 6)  # Make sure all fields are present
 
     def test_getRandomFemaleIsRandom(self):
 
@@ -117,8 +138,8 @@ class FemaleAPITests(TestCase):
         femaleToCreate = {}
         femaleToCreate['firstName'] = "Test"
         femaleToCreate['lastName'] = "Female"
-        femaleToCreate['dateOfBirth'] = "1990-01-01"
-        femaleToCreate['zipCode'] = "11111"
+        femaleToCreate['profileImage'] = createImageFile().file
+        femaleToCreate['profileImage'] = femaleToCreate['profileImage'].decode("utf-8")
         femaleToCreate['bio'] = "Test bio"
         femaleToCreate['fantasticBio'] = "Fantastic test bio"
 
@@ -130,7 +151,11 @@ class FemaleAPITests(TestCase):
         response = self.client.post(url, {'wrong': 'wrong'}, content_type='application/json')
         self.assertEquals(response.status_code, 400)  # Make sure bad params return error response
 
+        print('object being passed', femaleToCreate)
+        print('type being passed', type(femaleToCreate['profileImage']))
+        print('profile image', femaleToCreate['profileImage'])
         response = self.client.post(url, femaleToCreate)
+        print('response from server', response.data)
         self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
         femaleFromDb = Female.objects.get(pk=response.data['id'])

@@ -1,9 +1,8 @@
 import json
-from io import BytesIO
-import base64
-
 from PIL import Image
 
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.http import HttpResponse
 from django.core.files.images import ImageFile
 from django.core.urlresolvers import reverse
 from django.test import TestCase
@@ -30,11 +29,10 @@ def createImageFile():
     """
 
     image = Image.new('RGBA', size=(50, 50), color=(256, 0, 0))
-    image_file = BytesIO()
-    image.save(image_file, 'PNG')
-    img_str = base64.b64encode(image_file.getvalue())
+    response = HttpResponse(content_type="image/png")
+    image.save(response, 'PNG')
 
-    return ImageFile(img_str)
+    return ImageFile(image)
 
 
 class FemaleAPITests(TestCase):
@@ -135,11 +133,12 @@ class FemaleAPITests(TestCase):
             Female created with the API should be in the database
         """
 
+        profileImage = SimpleUploadedFile("test.png", createImageFile())
+
         femaleToCreate = {}
         femaleToCreate['firstName'] = "Test"
         femaleToCreate['lastName'] = "Female"
-        femaleToCreate['profileImage'] = createImageFile().file
-        femaleToCreate['profileImage'] = femaleToCreate['profileImage'].decode("utf-8")
+        femaleToCreate['profileImage'] = profileImage
         femaleToCreate['bio'] = "Test bio"
         femaleToCreate['fantasticBio'] = "Fantastic test bio"
 

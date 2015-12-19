@@ -150,11 +150,7 @@ class FemaleAPITests(TestCase):
         response = self.client.post(url, {'wrong': 'wrong'}, content_type='application/json')
         self.assertEquals(response.status_code, 400)  # Make sure bad params return error response
 
-        print('object being passed', femaleToCreate)
-        print('type being passed', type(femaleToCreate['profileImage']))
-        print('profile image', femaleToCreate['profileImage'])
         response = self.client.post(url, femaleToCreate)
-        print('response from server', response.data)
         self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
         femaleFromDb = Female.objects.get(pk=response.data['id'])

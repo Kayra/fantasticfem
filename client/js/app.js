@@ -54,3 +54,12 @@
     });
 
 })();
+
+
+// rootscope for error messages, broadcast
+
+// $resource instead of $http
+
+// $cacheFactory instead of SharedProperties
+
+// things like hostname should be angular constants in a global config

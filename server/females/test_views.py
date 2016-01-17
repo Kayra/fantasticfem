@@ -1,5 +1,9 @@
 import json
+from PIL import Image
 
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.http import HttpResponse
+from django.core.files.images import ImageFile
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
@@ -9,19 +13,34 @@ from .models import Female
 from .serializers import FemaleSerializer
 
 
-def createFemale(firstName, lastName, dateOfBirth, zipCode):
+def createFemale(firstName, lastName, dateOfBirth):
+
     """
         Convinience function to create a test female
     """
-    Female.objects.create(firstName=firstName, lastName=lastName, dateOfBirth=dateOfBirth, zipCode=zipCode, bio='bio example', fantasticBio='fantastic bio example')
+
+    Female.objects.create(firstName=firstName, lastName=lastName, profileImage=createImageFile(), bio='bio example', fantasticBio='fantastic bio example')
+
+
+def createImageFile():
+
+    """
+        Convinience function to create a test image
+    """
+
+    image = Image.new('RGBA', size=(50, 50), color=(256, 0, 0))
+    response = HttpResponse(content_type="image/png")
+    image.save(response, 'PNG')
+
+    return ImageFile(image)
 
 
 class FemaleAPITests(TestCase):
 
     def setUp(self):
-        createFemale('Ada', 'Lovelace', '1990-01-01', '11111')
-        createFemale('Barbara', 'Liskov', '1990-02-02', '22222')
-        createFemale('Murasaki', 'Shikibu', '1990-02-02', '33333')
+        createFemale('Ada', 'Lovelace', '11111')
+        createFemale('Barbara', 'Liskov', '22222')
+        createFemale('Murasaki', 'Shikibu', '33333')
 
     def test_getFemale(self):
 
@@ -44,7 +63,7 @@ class FemaleAPITests(TestCase):
         self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
         data = json.loads(response.content.decode())
-        self.assertEquals(len(data), 7)  # Make sure all fields are present
+        self.assertEquals(len(data), 6)  # Make sure all fields are present
 
         self.assertEquals(testIdentifier, data['id'])  # Make sure the correct female was returned
 
@@ -63,7 +82,7 @@ class FemaleAPITests(TestCase):
         self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
         data = json.loads(response.content.decode())
-        self.assertEquals(len(data), 7)  # Make sure all fields are present
+        self.assertEquals(len(data), 6)  # Make sure all fields are present
 
     def test_getRandomFemaleIsRandom(self):
 
@@ -114,11 +133,12 @@ class FemaleAPITests(TestCase):
             Female created with the API should be in the database
         """
 
+        profileImage = SimpleUploadedFile("test.png", createImageFile())
+
         femaleToCreate = {}
         femaleToCreate['firstName'] = "Test"
         femaleToCreate['lastName'] = "Female"
-        femaleToCreate['dateOfBirth'] = "1990-01-01"
-        femaleToCreate['zipCode'] = "11111"
+        femaleToCreate['profileImage'] = profileImage
         femaleToCreate['bio'] = "Test bio"
         femaleToCreate['fantasticBio'] = "Fantastic test bio"
 

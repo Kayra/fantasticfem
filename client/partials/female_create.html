@@ -36,42 +36,14 @@
         <p ng-message="maxlength">The maximum allowed length for the last name is 255 characters.</p>
     </div>
 
-    <div class="form-group">
-        <input name="dateOfBirth"
-        ng-model="create.female.dateOfBirth"
-        required
-        ng-pattern="/^\d{4}[-]\d{2}[-]\d{2}$/"
-        ng-focus
-        type="text"
-        maxlength="10"
-        placeholder="YYYY-MM-DD"
-        class="form-control">
-    </div>
-
-    <div class="error"
-    ng-show="femaleCreate.dateOfBirth.$dirty && femaleCreate.dateOfBirth.$invalid && !femaleCreate.dateOfBirth.$focused"
-    ng-messages="femaleCreate.dateOfBirth.$error">
-        <p ng-message="required">Please enter a date of birth.</p>
-        <p ng-message="pattern">Please enter the date in the format YYYY-MM-DD</p>
-    </div>
+    <img ng-if="create.female.profileImage" ng-src="{{create.female.previewImage}}">
 
     <div class="form-group">
-        <input name="zipCode"
-        ng-model="create.female.zipCode"
-        required
-        ng-pattern="/(^\d{5}$)|(^\d{5}-\d{4}$)/"
-        ng-focus
-        maxlength="5"
-        type="text"
-        placeholder="XXXXX"
-        class="form-control">
-    </div>
-
-    <div class="error"
-    ng-show="femaleCreate.zipCode.$dirty && femaleCreate.zipCode.$invalid && !femaleCreate.zipCode.$focused"
-    ng-messages="femaleCreate.zipCode.$error">
-        <p ng-message="required">Please enter a zipcode</p>
-        <p ng-message="pattern">Please enter the date in the US format of XXXXX</p>
+        <input name="profileImage"
+        file-model="create.female.profileImage"
+        type="file"
+        class="form-control"
+        image-preview="create.female.previewImage">
     </div>
 
     <div class="form-group">

@@ -29,49 +29,21 @@
         class="form-control">
     </div>
 
+    <img ng-if="edit.female.profileImage" ng-src="{{edit.female.previewImage}}">
+
+    <div class="form-group">
+        <input name="profileImage"
+        file-model="edit.female.profileImage"
+        type="file"
+        class="form-control"
+        image-preview="edit.female.previewImage">
+    </div>
+
     <div class="error"
     ng-show="femaleEdit.lastName.$dirty && femaleEdit.lastName.$invalid && !femaleEdit.lastName.$focused"
     ng-messages="femaleEdit.lastName.$error">
         <p ng-message="required">Please enter a last name.</p>
         <p ng-message="maxlength">The maximum allowed length for the last name is 255 characters.</p>
-    </div>
-
-    <div class="form-group">
-        <input name="dateOfBirth"
-        ng-model="edit.female.dateOfBirth"
-        required
-        ng-pattern="/^\d{4}[-]\d{2}[-]\d{2}$/"
-        ng-focus
-        type="text"
-        maxlength="10"
-        placeholder="YYYY-MM-DD"
-        class="form-control">
-    </div>
-
-    <div class="error"
-    ng-show="femaleEdit.dateOfBirth.$dirty && femaleEdit.dateOfBirth.$invalid && !femaleEdit.dateOfBirth.$focused"
-    ng-messages="femaleEdit.dateOfBirth.$error">
-        <p ng-message="required">Please enter a date of birth.</p>
-        <p ng-message="pattern">Please enter the date in the format YYYY-MM-DD</p>
-    </div>
-
-    <div class="form-group">
-        <input name="zipCode"
-        ng-model="edit.female.zipCode"
-        required
-        ng-pattern="/(^\d{5}$)|(^\d{5}-\d{4}$)/"
-        ng-focus
-        maxlength="5"
-        type="text"
-        placeholder="XXXXX"
-        class="form-control">
-    </div>
-
-    <div class="error"
-    ng-show="femaleEdit.zipCode.$dirty && femaleEdit.zipCode.$invalid && !femaleEdit.zipCode.$focused"
-    ng-messages="femaleEdit.zipCode.$error">
-        <p ng-message="required">Please enter a zipcode</p>
-        <p ng-message="pattern">Please enter the date in the US format of XXXXX</p>
     </div>
 
     <div class="form-group">

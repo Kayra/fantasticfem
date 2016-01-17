@@ -6,22 +6,18 @@
 
         var utility = {};
 
-        utility.formToJsonObject = function(formObject) {
+        utility.formToFormData = function(formObject) {
 
-            var femaleObject = {};
+            var femaleFormData = new FormData();
 
             for(var key in formObject) {
                 if (formObject.hasOwnProperty(key)) {
-                    femaleObject[key] = formObject[key];
+                    femaleFormData.append([key], formObject[key]);
                 }
             }
+            
+            return femaleFormData;
 
-            return angular.toJson(femaleObject);
-
-        }
-
-        utility.createFullName = function(firstName, lastName) {
-            return firstName + '_' + lastName;
         }
 
         return utility;

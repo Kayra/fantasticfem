@@ -17,6 +17,9 @@
                     femaleProperties[key] = properties[key];
                 }
             }
+
+            femaleProperties.previewImage = properties.profileImage;
+
             return femaleProperties;
 
         };
@@ -41,12 +44,18 @@
             return $http.get(host_name + 'females/list');
         };
 
-        female.createFemale = function(femaleJsonObject) {
-            return $http.post(host_name + 'females/create', femaleJsonObject);
+        female.createFemale = function(femaleObject) {
+            return $http.post(host_name + 'females/create', femaleObject, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            });
         };
 
-        female.editFemale = function(femaleJsonObject) {
-            return $http.put(host_name + 'females/edit', femaleJsonObject);
+        female.editFemale = function(femaleObject) {
+            return $http.put(host_name + 'females/edit', femaleObject, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            });
         };
 
         female.deleteFemale = function(id) {

@@ -74,6 +74,8 @@ def editFemale(request):
     except MultiValueDictKeyError:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
+    print(request.data['profileImage'])
+
     serializedFemale = FemaleSerializer(female, data=request.data)
 
     if serializedFemale.is_valid():

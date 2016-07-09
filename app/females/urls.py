@@ -4,16 +4,6 @@ from . import views
 
 urlpatterns = [
 
-    url(r'^get-random', views.getRandomFemale, name='get_random_female'),
-
-    url(r'^get', views.getFemale, name='get_female'),
-
-    url(r'^list', views.getFemaleList, name='get_female_list'),
-
-    url(r'^create', views.createFemale, name='create_female'),
-
-    url(r'^edit', views.editFemale, name='edit_female'),
-
-    url(r'^delete', views.deleteFemale, name='delete_female'),
+    url(r'^$', views.FemaleList.as_view(), name='female_list')
 
 ]

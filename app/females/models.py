@@ -8,3 +8,6 @@ class Female(models.Model):
     profile_image = models.ImageField()
     bio = models.TextField()
     fantastic_bio = models.TextField()
+
+    def __str__(self):
+        return '%s %s' % (self.first_name, self.last_name)

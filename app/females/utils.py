@@ -1,9 +1,9 @@
 import random
 
-from .models import Female
+from females.models import Female
 
 
-def getRandomFemale():
+def get_random_female():
     """
         Return a random female model object from the db
     """

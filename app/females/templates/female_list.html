@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for female in female_list %}
+        <h1>{{ female.first_name }} {{ female.last_name }}</h1>
+    {% endfor %}
+
+
+{% endblock %}
